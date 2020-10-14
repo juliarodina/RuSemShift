@@ -11,7 +11,7 @@ It can be used to evaluate automatic systems for semantic change detection.
 Please check our paper for more details:
 
 _Julia Rodina and Andrey Kutuzov. 
-RuSemShift: a dataset of historical lexical semantic changes in Russian.
+[RuSemShift: a dataset of historical lexical semantic changes in Russian](https://arxiv.org/abs/2010.06436)
 To appear in Proceedings of the 28th International Conference on Computational Linguistics (COLING 2020).
 Association for Computational Linguistics, Barcelona, Spain (2020)._
 
