@@ -1,4 +1,4 @@
-word	COMPARE	EARLIER	LATER	delta_later	frequency_presov/sov	delta_frequency
+word	COMPARE	EARLIER	LATER	delta_later	frequencies	delta_frequency
 агентство	3.15	3.62	3.55	-0.07	842/333	509
 богадельня	3.65	3.3	3.29	-0.01	442/190	252
 больница	3.86	3.71	3.92	0.21	3337/6597	3260
