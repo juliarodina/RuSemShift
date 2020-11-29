@@ -2,7 +2,7 @@
 **RuSemShift** is a large-scale human-annotated dataset of diachronic semantic shifts in Russian.
 Lexical semantic change is a process when a word changes its meaning over time. 
 This dataset provides information about relative degree of historical semantic change for dozens of Russian words. 
-It is based on sentence contexts  extracted from the [Russian National Corpus](https://ruscorpora.ru/).
+It is based on sentence contexts  extracted from the [Russian National Corpus](https://rusvectores.org/static/corpora/).
 
 This is the first semantic change dataset for Russian created in a large-scale crowd-sourcing annotation effort. 
 The annotation followed the [DURel framework](https://www.aclweb.org/anthology/N18-2027/),
