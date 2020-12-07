@@ -6,8 +6,8 @@
 The 'GROUND_TRUTH' column contains binary labels (changed/not changed) taken from prior linguistic work.
 - `raw_annotations.tsv`: list of sentences presented to annotators and their judgments (before averaging).
 - `testset.tsv`: the **RuSemShift_2** dataset itself, with averaged semantic relatedness measures (see below)
-- `testset_filtered.tsv`: the filtered version of the dataset. 
-Words with inter-rater agreement less than 0.2 are excluded. 
+- `testset_filtered.tsv`: the filtered version of the dataset.
+Words with inter-rater agreement less than 0.2 are excluded.
 We recommend to use this version, as it more or less guarantees the annotation consistency.
 
 # Annotation
@@ -32,3 +32,4 @@ They follow the [DURel framework](https://www.aclweb.org/anthology/N18-2027/):
 
 The last two measures can actually be used as the degrees of semantic change.
 
+We provide word frequencies in Soviet and post-Soviet corpora, as an additional reference point.
