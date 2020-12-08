@@ -11,8 +11,8 @@ Words with inter-rater agreement less than 0.2 are excluded.
 We recommend to use this version, as it more or less guarantees the annotation consistency.
 
 # Annotation
-The original target word list was borrowed from ["Two centuries in two thousand words: Neural embedding models in detecting diachronic lexical changes"](https://www.academia.edu/31065097/Two_centuries_in_two_thousand_words_Neural_embedding_models_in_detecting_diachronic_lexical_changes). 
-It consists of 43 words which acquired a new sense or lost an old one: 38 nouns and 5 adjectives. 
+The original target word list was borrowed from ["Two centuries in two thousand words: Neural embedding models in detecting diachronic lexical changes"](https://www.academia.edu/31065097/Two_centuries_in_two_thousand_words_Neural_embedding_models_in_detecting_diachronic_lexical_changes).
+It consists of 43 words which acquired a new sense or lost an old one: 38 nouns and 5 adjectives.
 
 We added 28 random fillers and the resulting set of 71 words from annotated via crowdsourcing.
 The annotators were asked to estimate the relatedness between senses of a target word in two different sentences according to the following grade schema:
@@ -21,6 +21,10 @@ The annotators were asked to estimate the relatedness between senses of a target
 - 2: Distantly related
 - 3: Closely Related
 - 4: Identical
+
+Inter-rater agreement as measured by Krippendorff’s α: **0.51**.
+
+Inter-rater agreement as measured by average pairwise Spearman correlation: **0.505**.
 
 # Relatedness measures
 The resulting scores were then averaged to produce four measures of semantic relatedness. 

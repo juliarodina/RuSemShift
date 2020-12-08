@@ -11,8 +11,8 @@ Words with inter-rater agreement less than 0.2 are excluded.
 We recommend to use this version, as it more or less guarantees the annotation consistency.
 
 # Annotation
-The original target word list was borrowed from the New Words and Meanings dictionary by Burtseva at al. 
-It consists of 42 words which acquired a new sense or lost an old one: 35 nouns and 7 adjectives. 
+The original target word list was borrowed from the New Words and Meanings dictionary by Burtseva at al 2009.
+It consists of 42 words which acquired a new sense or lost an old one: 35 nouns and 7 adjectives.
 
 We added 27 random fillers and the resulting set of 69 words from annotated via crowdsourcing.
 The annotators were asked to estimate the relatedness between senses of a target word in two different sentences according to the following grade schema:
@@ -21,6 +21,10 @@ The annotators were asked to estimate the relatedness between senses of a target
 - 2: Distantly related
 - 3: Closely Related
 - 4: Identical
+
+Inter-rater agreement as measured by Krippendorff’s α: **0.53**.
+
+Inter-rater agreement as measured by average pairwise Spearman correlation: **0.525**.
 
 # Relatedness measures
 The resulting scores were then averaged to produce four measures of semantic relatedness. 
