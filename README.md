@@ -6,13 +6,13 @@ It is based on sentence contexts  extracted from the [Russian National Corpus](h
 
 This is the first semantic change dataset for Russian created in a large-scale crowd-sourcing annotation effort. 
 The annotation followed the [DURel framework](https://www.aclweb.org/anthology/N18-2027/),
-which makes **RuSemShift** fully compatible with [semantic change datasets developed for other languages](https://arxiv.org/abs/2007.11464v2).
+which makes **RuSemShift** fully compatible with [semantic change datasets developed for other languages](https://www.aclweb.org/anthology/2020.semeval-1.1/).
 It can be used to evaluate automatic systems for semantic change detection.
 Please check our paper for more details:
 
 _Julia Rodina and Andrey Kutuzov. 
-[RuSemShift: a dataset of historical lexical semantic changes in Russian](https://arxiv.org/abs/2010.06436)
-To appear in Proceedings of the 28th International Conference on Computational Linguistics (COLING 2020).
+[RuSemShift: a dataset of historical lexical semantic changes in Russian](https://www.aclweb.org/anthology/2020.coling-main.90/)
+Proceedings of the 28th International Conference on Computational Linguistics (COLING 2020).
 Association for Computational Linguistics, Barcelona, Spain (2020)._
 
 **RuSemShift** consists of two subsets each covering a specific pair of time periods:
