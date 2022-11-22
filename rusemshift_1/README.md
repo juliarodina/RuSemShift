@@ -10,6 +10,8 @@ The 'GROUND_TRUTH' column contains binary labels (changed/not changed) taken fro
 Words with inter-rater agreement less than 0.2 are excluded.
 We recommend to use this version, as it more or less guarantees the annotation consistency.
 
+The `DWUG` directory contains the same dataset in the Diachronic Word Usage Graphs format.
+
 # Annotation
 The original target word list was borrowed from ["Two centuries in two thousand words: Neural embedding models in detecting diachronic lexical changes"](https://www.academia.edu/31065097/Two_centuries_in_two_thousand_words_Neural_embedding_models_in_detecting_diachronic_lexical_changes).
 It consists of 43 words which acquired a new sense or lost an old one: 38 nouns and 5 adjectives.

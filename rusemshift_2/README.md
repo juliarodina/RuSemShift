@@ -10,6 +10,8 @@ The 'GROUND_TRUTH' column contains binary labels (changed/not changed) taken fro
 Words with inter-rater agreement less than 0.2 are excluded.
 We recommend to use this version, as it more or less guarantees the annotation consistency.
 
+The `DWUG` directory contains the same dataset in the Diachronic Word Usage Graphs format.
+
 # Annotation
 The original target word list was borrowed from the New Words and Meanings dictionary by Burtseva at al 2009.
 It consists of 42 words which acquired a new sense or lost an old one: 35 nouns and 7 adjectives.
