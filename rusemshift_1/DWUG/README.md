@@ -13,14 +13,22 @@ Julia Rodina and Andrey Kutuzov
 This data collection contains diachronic Word Usage Graphs (WUGs) for Russian. 
 Find a description of the data format, code to process the data and further datasets on the [WUGsite](https://www.ims.uni-stuttgart.de/data/wugs).
 
-Note:
+Important notes:
 
 This dataset was annotated in a crowd-working effort with hundreds of annotators.
 Therefore, pairwise inter-rater agreement scores are meaningless and are not provided.
+This also means that the same annotator name may correspond to a different person for two different use pairs. 
+E.g. the judgment of annotator1 for two different use pairs could be done by a different person.
+
+- This version of the data set is an update of the original RuSemShift data set. The annotated data remains the same, but the following points differ:
+  * we change the data format to be compatible with [WUG data sets](https://www.ims.uni-stuttgart.de/data/wugs),
+  * missing target word indices are inferred with [FuzzyWuzzy](https://pypi.org/project/fuzzywuzzy/),
+  * punctuation at the beginning or end of target words are excluded from target word indices,
+  * change scores are calculated with the code from the [WUG repository](https://github.com/Garrafao/WUGs). This code first aggregates judgments of use pairs with the median over all annotators and then averages all the scores for the measures EARLIER, LATER, COMPARE. Hence, the change scores slightly differ from the ones in the original dataset.
 
 Please find more information on the provided data in the paper referenced below.
  
-Version: 1.0.0, 22.11.2022.
+Version: 2.0.0, 22.11.2022. WUG version.
 
 ### Reference
 
