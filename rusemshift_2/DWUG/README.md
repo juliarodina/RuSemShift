@@ -15,8 +15,11 @@ Find a description of the data format, code to process the data and further data
 
 Note:
 
+This dataset was annotated in a crowd-working effort with hundreds of annotators.
+Therefore, pairwise inter-rater agreement scores are meaningless and are not provided.
+
 Please find more information on the provided data in the paper referenced below.
- 
+
 Version: 1.0.0, 22.11.2022.
 
 ### Reference
