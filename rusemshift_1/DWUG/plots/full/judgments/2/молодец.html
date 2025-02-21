@@ -1,0 +1,1569 @@
+<html xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+    <center>
+        <h1 id="heading">молодец (2)</h1>
+    </center>
+
+
+    <!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+    <style type="text/css">
+       #mynetwork {
+            width: 65%;
+            height: 90%;
+
+            margin-right: 2%;
+
+            height: {
+                    {
+                    height
+                }
+            }
+
+            ;
+
+            background-color: {
+                    {
+                    bgcolor
+                }
+            }
+
+            ;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+            {
+            % if nodes|length>100 and physics_enabled %
+        }
+
+        #loadingBar {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+
+            width: {
+                    {
+                    width
+                }
+            }
+
+            ;
+
+            height: {
+                    {
+                    height
+                }
+            }
+
+            ;
+            background-color:rgba(200, 200, 200, 0.8);
+            -webkit-transition: all 0.5s ease;
+            -moz-transition: all 0.5s ease;
+            -ms-transition: all 0.5s ease;
+            -o-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+            opacity:1;
+        }
+
+        #bar {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 20px;
+            height: 20px;
+            margin: auto auto auto auto;
+            border-radius: 11px;
+            border: 2px solid rgba(30, 30, 30, 0.05);
+            background: rgb(0, 173, 246);
+            /* Old browsers */
+            box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.4);
+        }
+
+        #border {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 500px;
+            height: 23px;
+            margin: auto auto auto auto;
+            box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+
+        #text {
+            position: absolute;
+            top: 8px;
+            left: 530px;
+            width: 30px;
+            height: 50px;
+            margin: auto auto auto auto;
+            font-size: 22px;
+            color: #000000;
+        }
+
+        div.outerBorder {
+            position: relative;
+            top: 400px;
+            width: 600px;
+            height: 44px;
+            margin: auto auto auto auto;
+            border: 8px solid rgba(0, 0, 0, 0.1);
+            background: rgb(252, 252, 252);
+            /* Old browsers */
+            background: -moz-linear-gradient(top, rgba(252, 252, 252, 1) 0%, rgba(237, 237, 237, 1) 100%);
+            /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(252, 252, 252, 1)), color-stop(100%, rgba(237, 237, 237, 1)));
+            /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(top, rgba(252, 252, 252, 1) 0%, rgba(237, 237, 237, 1) 100%);
+            /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(top, rgba(252, 252, 252, 1) 0%, rgba(237, 237, 237, 1) 100%);
+            /* Opera 11.10+ */
+            background: -ms-linear-gradient(top, rgba(252, 252, 252, 1) 0%, rgba(237, 237, 237, 1) 100%);
+            /* IE10+ */
+            background: linear-gradient(to bottom, rgba(252, 252, 252, 1) 0%, rgba(237, 237, 237, 1) 100%);
+            /* W3C */
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fcfcfc', endColorstr='#ededed', GradientType=0);
+            /* IE6-9 */
+            border-radius: 72px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+            {
+            % endif %
+        }
+
+            {
+            % if conf %
+        }
+
+        #config {
+            float: left;
+            width: 400px;
+            height: 600px;
+        }
+
+            {
+            % endif %
+        }
+
+            {
+            % if tooltip_link %
+        }
+
+        /* position absolute is important and the container has to be relative or absolute as well. */
+        div.popup {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            display: none;
+            background-color: #f5f4ed;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            border-radius: 3px;
+            border: 1px solid #808074;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+
+
+        /* hide the original tooltip */
+
+
+        .vis-tooltip {
+            position: absolute;
+        }
+
+        #config {
+            display: none;
+
+        }
+
+            {
+            % endif %
+        }
+
+        #custom_wugs {
+            height: 90%;
+            width: 30%;
+            overflow: scroll;
+        }
+
+        #custom_wugs>* {
+            padding: 1%;
+            margin-left: 2%;
+        }
+
+
+
+
+
+
+        .help-tip {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            text-align: center;
+            background-color: #E55B0A;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            font-size: 14px;
+            line-height: 26px;
+            cursor: default;
+        }
+
+        .help-tip:before {
+            content: '?';
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .help-tip:hover p {
+            display: block;
+            transform-origin: 100% 0%;
+
+            -webkit-animation: fadeIn 0.3s ease-in-out;
+            animation: fadeIn 0.3s ease-in-out;
+
+        }
+
+        .help-tip p {
+            /* The tooltip */
+            display: none;
+            text-align: left;
+            background-color: #1E2021;
+            padding: 20px;
+            width: 800px;
+            position: absolute;
+            border-radius: 3px;
+            box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+            right: 16px;
+            color: #FFF;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .help-tip p:before {
+            /* The pointer of the tooltip */
+            position: absolute;
+            content: '';
+            width: 0;
+            height: 0;
+            border: 6px solid transparent;
+            border-bottom-color: #1E2021;
+            right: 10px;
+            top: -12px;
+        }
+
+        .help-tip p:after {
+            /* Prevents the tooltip from being hidden */
+            width: 100%;
+            height: 40px;
+            content: '';
+            position: absolute;
+            top: -40px;
+            left: 0;
+        }
+
+
+        /* CSS animation */
+
+        @-webkit-keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.6);
+            }
+
+            100% {
+                opacity: 100%;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 100%;
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-icon {
+            position: absolute;
+            top: 40%;
+            left: 30%;
+            transform: translate(-50%, -50%);
+            border: 16px solid #f3f3f3; /* Light grey */
+            border-top: 16px solid red;
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
+            visibility: hidden;
+        }
+
+        #custom_wugs {
+            font-size: smaller;
+        }
+
+        .shifted {
+            margin-left: 3%;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        #fillSD {
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+    </style>
+
+</head>
+
+<body>
+     <div id="loader" style="display: none"></div>
+
+    <div id="mynetwork"></div>
+    
+    
+
+    <div id="custom_wugs">
+
+
+
+        <div class="help-tip">
+            <p><em>General</em><br />
+           Firefox is the recommended browser for this application. For large graphs, loading time may vary. This application is under development. Feedback is appreciated. The code, from which you can generate your own graphs, can be found here:  <a href="https://github.com/Garrafao/WUGs/" target="_blank" style="color: white">WUGs repository</a><br /><br /><br />
+                <em>Statistics</em><br />
+            The statistics section gets updated as the filters are used. For in-depth stats, refer to the stats dropdowns on the bottom.<br /><br /><br />
+                <em>Edge & node filters</em><br />
+            Edge weights are calculated as the mean of all annotations of the node pair.
+            Nodes with noisy data appear black and have -1 as their label. Both the noisy nodes and edges with wrongly calculated weights can be filtered out.
+            Edge and node filters are interlinked and should show the desired selection. While one filter is being calculated, the page will prevent you from selecting another filter.<br /><br /><br />
+                <em>Annotators filter</em><br />
+            The annotators filter resets all other filters and shows the initial graph, but only edges the selected annotators have annotated.</p>
+        </div>
+
+        <div class="infoContainer">
+            <h4>Info: </h4>
+            <div id="clusterInfo"></div>
+            <h4>Statistics:</h4>
+            <div id="statistics"></div>
+            <p id="fillMean">Edge weight mean: </p>
+            <p id="fillSD">Edge weight standard deviation: </p>
+        </div>
+        <div class ="edgeFilterContainer">
+            <h4>Edge filters: </h4>
+
+            <label for="checkboxNaN">Show NaN edges </label>
+            <input type="checkbox" id="checkboxNaN" onclick="filterNaN()">
+            <br><br>
+            <div class="slideContainer" style="display: block; clear: both">
+                <label for="slider-min" style="display: block">Min weight: <span id="sliderValueDisplayMin" style="display: inline-block">1</span></label>
+                <input type="range" min="1" max="4" value="1" class="slider-load" id="slider-min">
+                <label for="slider" style="display: block">Max weight: <span id="sliderValueDisplay" style="display: inline-block">4</span></label>
+                <input type="range" min="1" max="4" value="4" class="slider-load" id="slider">
+            </div>
+        </div>
+
+
+
+
+        <div class="nodeFilterContainer">
+            <h4>Node filters: </h4>
+
+            <label for="checkboxNoiseLabels">Show noise cluster</label>
+            <input type="checkbox" id="checkboxNoiseLabels" onclick="filterNoiseLabels()">
+            <br><br>
+            <form onsubmit="dateFilter();return false">
+                <label for="minPicker">From date: </label>
+                <select class="picker" id="minPicker"></select>
+                <label for="maxPicker">to date: </label>
+                <select class="picker" id="maxPicker"></select>
+                <input type="submit" value="Filter">
+            </form>
+
+            <label for="groupPicker">Grouping: </label>
+            <select  class="select-load" id="groupPicker">
+                <option>All</option>
+                <option>1</option>
+                <option>2</option>
+            </select>
+            <div class="loading-icon"></div>
+        </div>
+
+        <div id="annotatorsContainer"></div>
+
+        <div class="detailsContainer">
+            <details id="stats">
+                <summary class="bold">Stats</summary>
+                <table id="stats-table"></table>
+            </details>
+            <details id="statsGroupings">
+                <summary class="bold">Grouping stats</summary>
+                <table id="stats-groupings-table"></table>
+            </details>
+            <details id="statsAgreement">
+                <summary class="bold">Agreement stats</summary>
+                <table id="stats-agreement-table"></table>
+            </details>
+            <details id="statsPlotting">
+                <summary class="bold">Plotting stats</summary>
+                <table id="stats-plotting-table"></table>
+            </details>
+            <details id="statsDataJoint">
+                <summary class="bold">Annotator data</summary>
+            </details>
+        </div>
+
+    </div>
+
+    <div id="config">
+
+    </div>
+
+    
+     <!--<script type="text/javascript" src="../stats.js"></script>
+     <script type="text/javascript" src="../stats_agreement.js"></script>
+     <script type="text/javascript" src="../stats_groupings.js"></script>
+     <script type="text/javascript" src="../stats_plotting.js"></script>
+     <script type="text/javascript" src="../data_joint.js"></script>-->
+
+    <script type="text/javascript">
+        // initialize global variables.
+        var edges;
+        var nodes;
+        var network;
+        var container;
+        var options, data;
+
+
+        // This method is responsible for drawing the graph, returns the drawn network
+        function drawGraph() {
+            var container = document.getElementById('mynetwork');
+
+            
+
+            // parsing and collecting nodes and edges from the python
+            nodes = new vis.DataSet([{"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-18-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e-- \u0415\u0449\u0435 \u0447\u0442\u043e \u0435\u0441\u0442\u044c \u0441\u0443\u0434\u0438\u0442\u044c -- \u0411\u0443\u0434\u0435\u043c \u0435\u0449\u0435 \u043c\u0430\u043b\u043e,\u003cbr\u003e\u0430\u0442\u0430\u043c\u0430\u043d\u044b-\u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0446\u044b\u003c/b\u003e!\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-18-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": 1603.4484999604063, "y": 826.0264742871072}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-19-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cb\u003e\u041c\u043e\u043b\u043e\u0434\u0435\u0446\u003c/b\u003e! -- \u0434\u0443\u043c\u0430\u043b \u041a\u0443\u0440\u0433\u0430\u043d\u043e\u0432 \u043e \u0411\u043e\u0440\u0438\u043d\u0435.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-19-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": 1895.786779248522, "y": 593.4656765549728}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-17-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e-- \u0410! \u041a\u043e\u0437\u0435\u043b\u044c\u0446\u043e\u0432, \u041a\u043e\u0437\u0435\u043b\u044c\u0446\u043e\u0432! \u0445\u043e\u0440\u043e\u0448\u043e, \u0447\u0442\u043e \u043f\u0440\u0438\u0435\u0445\u0430\u043b,\u003cbr\u003e\u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0435\u0446\u003c/b\u003e!..\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-17-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": -240.33774927024015, "y": -56.95496225031388}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-21-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u041e, \u0434\u0430 \u043a\u0430\u043a\u0438\u043c \u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0446\u0435\u043c\u003c/b\u003e \u0441\u043e\u0441\u043a\u043e\u0447\u0438\u043b \u0441 \u043a\u043e\u043d\u044f!..\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-21-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": -699.2971187913291, "y": 489.7811288250031}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-114-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u0427\u0442\u043e \u0434\u043e \u0410\u043b\u0435\u043a\u0441\u0435\u044f \u041a\u043e\u0437\u044c\u043c\u0438\u0447\u0430, \u0442\u043e \u043e\u043d \u043f\u0440\u043e\u0441\u0442\u043e \u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0435\u0446\u003c/b\u003e \u0438 \u0432\u044b \u0435\u043c\u0443\u003cbr\u003e\u043c\u043d\u043e\u0433\u0438\u043c \u043e\u0431\u044f\u0437\u0430\u043d\u044b.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-114-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": -261.1716486939137, "y": -793.7562637437369}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-85-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u0414\u0440\u0443\u0433\u043e\u0439 \u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0435\u0446\u003c/b\u003e \u0438 \u0442\u043e\u0436\u0435, \u0434\u043e\u043b\u0436\u043d\u043e \u0431\u044b\u0442\u044c, \u043f\u0440\u0438\u043a\u0430\u0437\u0447\u0438\u043a,\u003cbr\u003e\u043f\u0440\u043e\u0445\u043e\u0434\u0438\u0432\u0448\u0438\u0439 \u043f\u043e \u0442\u0440\u043e\u0442\u0443\u0430\u0440\u0443, \u043e\u043a\u043b\u0438\u043a\u043d\u0443\u043b \u0435\u0433\u043e: -- \u0417\u0430\u0447\u0435\u043c \u0442\u044b \u044d\u0442\u043e, \u0412\u0430\u0441\u044f, \u0442\u0430\u043c \u0431\u044b\u043b\u003cbr\u003e-- \u041f\u043b\u0430\u043a\u0430\u0442\u043d\u044b\u0439 \u0432\u044b\u043f\u0440\u0430\u0432\u043b\u044f\u043b!..\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-85-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": 1216.8708898912807, "y": -65.22546640144805}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-115-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u041e\u0442\u0435\u0440\u0435\u0432 \u043f\u043e\u0442 \u0441 \u0447\u0435\u043b\u0430, \u041a\u0430\u043b\u044c\u043c\u0430\u043d \u0441\u043a\u0430\u0437\u0430\u043b \u0412\u0435\u0440\u0443\u0448\u043a\u0435: -- \u003cb\u003e\u041c\u043e\u043b\u043e\u0434\u0435\u0446\u003c/b\u003e,\u003cbr\u003e\u041c\u0430\u0440\u0438\u0448\u043a\u0430!\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-115-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": -232.17919707469565, "y": -808.6079813353256}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-105-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u041c\u0438\u0445\u0430\u0438\u043b \u042e\u0440\u044c\u0435\u0432\u0438\u0447 \u043d\u0435 \u0431\u0435\u0437\u0440\u043e\u0434\u043d\u044b\u0439, \u043d\u0435 \u043d\u0438\u0449\u0438\u0439, \u043e\u043d \u0432 \u0441\u043b\u0430\u0432\u0435 \u0438 \u0441\u043e\u0431\u043e\u0439\u003cbr\u003e\u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0435\u0446\u003c/b\u003e.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-105-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": 1504.4032192430036, "y": 565.1211938705987}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-89-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cb\u003e\u041c\u043e\u043b\u043e\u0434\u0435\u0446\u003c/b\u003e \u043c\u0443\u0436\u0447\u0438\u043d\u0430!\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-89-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": 560.740969964825, "y": 1664.0325634275653}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-104-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u0421\u0430\u0444\u043e\u043d\u043e\u0432 \u043f\u043e\u0434\u043e\u0448\u0451\u043b \u043a \u041c\u0430\u043a\u0441\u0438\u043c\u043e\u0432\u0438\u0447\u0443 \u0438 \u043f\u0440\u043e\u0442\u044f\u043d\u0443\u043b \u0435\u043c\u0443 \u0440\u0443\u043a\u0443: -- \u0412\u044b --\u003cbr\u003e\u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0435\u0446\u003c/b\u003e!\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-104-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": 1598.8317195025247, "y": 475.5105871755497}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-103-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u041f\u043e\u0434\u0446\u0435\u043f\u0438\u043b\u0430 \u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0446\u0430\u003c/b\u003e!\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-103-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": 1591.7200597779295, "y": -990.2966261110308}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-93-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u0422\u0430\u043a\u0438\u0435 \u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0446\u044b\u003c/b\u003e \u043c\u044b \u0431\u044b\u043b\u0438, \u0447\u0442\u043e \u0438\u0437-\u043f\u043e\u0434 \u0440\u0443\u0447\u043a\u0438\u003cbr\u003e\u043f\u043e\u0441\u043c\u043e\u0442\u0440\u0435\u0442\u044c!\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-93-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": -225.6627357236819, "y": 1896.1565972026174}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-94-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u041e\u043d \u0431\u044b\u043b \u0441\u043e\u0432\u0441\u0435\u043c \u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0435\u0446\u003c/b\u003e, \u043d\u0430\u0448 \u041a\u0430\u0440\u043b!..\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-94-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": 1492.7114313065788, "y": 1193.127573528455}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-101-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u0410 \u0442\u044b, \u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0435\u0446\u003c/b\u003e, \u0442\u0435\u0431\u044f \u041c\u0430\u0442\u0432\u0435\u0435\u043c \u0437\u0432\u0430\u0442\u044c \u0418\u0437 \u0424\u043e\u0442\u044c\u044f\u043d\u043a\u0438.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-101-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": -1567.5817718329151, "y": 1301.2126267903682}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-95-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e-- \u0427\u0435\u0440\u043a\u0435\u0441\u043e\u0432 \u0431\u043e\u0438\u0442\u0435\u0441\u044c, \u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0446\u044b\u003c/b\u003e -- \u0411\u043e\u044f\u043b\u0430\u0441\u044c \u0431\u0430\u0431\u0430 \u0432 \u043b\u0435\u0441 \u0437\u0430\u003cbr\u003e\u0434\u0440\u043e\u0432\u0430\u043c\u0438 \u0441\u0445\u043e\u0434\u0438\u0442\u044c, \u0442\u0430\u043a \u0432 \u0434\u043e\u043c\u0443 \u0438 \u0437\u0430\u043c\u0435\u0440\u0437\u043b\u0430, -- \u0443\u0436\u0435 \u043f\u043e-\u0431\u043e\u043b\u0433\u0430\u0440\u0441\u043a\u0438 \u0441\u043a\u0430\u0437\u0430\u043b\u003cbr\u003e\u041c\u0438\u0442\u043a\u043e.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-95-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": 906.4325179249105, "y": 1803.7403061942045}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-96-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u041f\u043e \u0435\u0433\u043e \u0431\u043e\u043a\u0430\u043c \u0441\u0442\u043e\u044f\u043b\u0438 \u0434\u0432\u0430 \u0431\u0435\u0437\u043c\u043e\u043b\u0432\u043d\u044b\u0445 \u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0446\u0430\u003c/b\u003e \u0438\u0437 \u0435\u0433\u043e\u003cbr\u003e\u043e\u0445\u0440\u0430\u043d\u044b, \u043e\u0434\u043d\u043e\u043b\u0435\u0442\u043a\u0438 \u0435\u043c\u0443, \u0432 \u0431\u0435\u043b\u044b\u0445, \u0443\u0441\u043f\u0435\u0432\u0448\u0438\u0445 \u043f\u043e\u0441\u0435\u0440\u0435\u0442\u044c \u043e\u0432\u0447\u0438\u043d\u043d\u044b\u0445 \u043a\u043e\u0440\u043e\u0442\u0430\u0439\u043a\u0430\u0445\u003cbr\u003e\u0441 \u043a\u0443\u0440\u0447\u0430\u0432\u043e\u0439 \u043c\u0435\u0440\u043b\u0443\u0448\u043a\u043e\u0432\u043e\u0439 \u0432\u044b\u043f\u0443\u0448\u043a\u043e\u0439.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-96-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": -1692.760751056925, "y": 768.9670156101181}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-97-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e-- \u0418 \u043e\u0431\u0440\u0430\u0442\u044f\u0441\u044c \u043a \u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0446\u0443\u003c/b\u003e: -- \u0410 \u0437\u043d\u0430\u0435\u0448\u044c, \u043a\u0442\u043e \u043f\u0440\u0435\u0434 \u0442\u043e\u0431\u043e\u0439\u003cbr\u003e\u0441\u0438\u0434\u0438\u0442 \u042f \u043f\u0440\u0435\u0434 \u0442\u043e\u0431\u043e\u0439 \u0441\u0438\u0436\u0443, \u0440\u0436\u0435\u0432\u0441\u043a\u0438\u0439 \u043a\u0443\u043f\u0435\u0446 \u0410\u0431\u0440\u043e\u0441\u0438\u043c \u0422\u0432\u0435\u0440\u0434\u043e\u0437\u0430\u0434\u043e\u0432,\u003cbr\u003e\u0444\u0430\u0431\u0440\u0438\u043a\u0430\u043d\u0442.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-97-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": -1662.8516713850547, "y": 780.8955283064331}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-107-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e-- \u0410\u0439 \u0434\u0430 \u0420\u044b\u0436\u0438\u043a, \u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0435\u0446\u003c/b\u003e! -- \u043f\u0440\u0438\u0432\u0435\u0442\u0441\u0442\u0432\u043e\u0432\u0430\u043b \u0435\u0433\u043e\u003cbr\u003e\u0414\u0443\u043b\u044f.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-107-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": 155.80447656385002, "y": 1769.9222121661328}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-113-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e-- \u0410 \u0432\u0435\u0434\u0438 \u0435\u0433\u043e \u0441\u044e\u0434\u0430, \u0434\u043e\u0431\u0440\u0430 \u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0446\u0430\u003c/b\u003e!\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-113-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": 383.16272428808065, "y": 1609.351274867019}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-83-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u0412\u043e\u0442 \u043f\u043e\u0441\u043c\u043e\u0442\u0440\u0438, \u043c\u044b \u0434\u0432\u043e\u0435 \u0448\u043b\u0438 \u0434\u043e\u0440\u043e\u0433\u043e\u044e \u0438 \u043d\u0430\u0448\u043b\u0438 \u0432\u043e\u0442 \u044d\u0442\u0443 \u0448\u043b\u044f\u043f\u0443-\u003cbr\u003e\u043d\u0435\u0432\u0438\u0434\u0438\u043c\u043a\u0443 \u0438 \u044d\u0442\u0438 \u0441\u0430\u043f\u043e\u0433\u0438-\u0441\u0430\u043c\u043e\u0445\u043e\u0434\u044b, \u0434\u0430 \u0435\u0449\u0435 \u0442\u0430\u043a\u0443\u044e \u0441\u043a\u0430\u0442\u0435\u0440\u0442\u044c, \u043a\u043e\u0442\u043e\u0440\u0443\u044e \u0442\u044b \u043d\u0430\u003cbr\u003e\u0437\u0435\u043c\u043b\u0435 \u0432\u0438\u0434\u0438\u0448\u044c \u0438 \u043a\u043e\u0442\u043e\u0440\u0443\u044e \u0435\u0436\u0435\u043b\u0438 \u0440\u0430\u0437\u0432\u0435\u0440\u043d\u0435\u0448\u044c, \u0442\u043e \u0434\u0432\u0435\u043d\u0430\u0434\u0446\u0430\u0442\u044c \u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0446\u0435\u0432\u003c/b\u003e\u003cbr\u003e\u0434\u0430 \u0434\u0432\u0435\u043d\u0430\u0434\u0446\u0430\u0442\u044c \u0436\u0435 \u0434\u0435\u0432\u0438\u0446 \u0438\u0437 \u043d\u0435\u0435 \u0432\u044b\u043f\u0440\u044b\u0433\u043d\u0443\u0442, \u0438 \u043d\u0430\u0441\u0442\u0430\u0432\u044f\u0442 \u043d\u0430 \u0442\u0443 \u0441\u043a\u0430\u0442\u0435\u0440\u0442\u044c\u003cbr\u003e\u0440\u0430\u0437\u043d\u044b\u0445 \u043a\u0443\u0448\u0430\u043d\u044c\u0435\u0432 \u0438 \u043d\u0430\u043f\u0438\u0442\u043a\u043e\u0432, \u0438 \u0441\u0442\u0430\u043d\u0443\u0442 \u043f\u043e\u0442\u0447\u0435\u0432\u0430\u0442\u044c \u0442\u043e\u0433\u043e, \u043a\u0442\u043e \u0441\u043a\u0430\u0442\u0435\u0440\u0442\u044c\u003cbr\u003e\u0440\u0430\u0437\u0432\u0435\u0440\u043d\u0435\u0442.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-83-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": 64.32000850064848, "y": -894.4740190309195}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-12-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e-- \u0410\u0439, \u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0435\u0446\u003c/b\u003e! -- \u0448\u0438\u043f\u0435\u043b \u0438\u0437 \u0443\u043a\u0440\u044b\u0442\u0438\u044f \u041f\u0443\u043b\u044c\u043a\u0438\u043d.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-12-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": 209.4888384811561, "y": -541.7066919128944}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-29-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u041e\u043d\u0430 \u0441\u043a\u0430\u0437\u0430\u043b\u0430: \"\u0422\u044b, \u043a\u043e\u043d\u0435\u0447\u043d\u043e, \u043f\u043b\u043e\u0445\u043e \u0432\u044b\u0441\u0442\u0443\u043f\u0438\u043b, \u043d\u043e \u0442\u044b\u003cbr\u003e\u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0435\u0446\u003c/b\u003e.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-29-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": 1297.066202280689, "y": 1433.7864415611841}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-28-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e-- \u041f\u043e\u0447\u0435\u043c\u0443 \u0434\u0435\u043d\u044c \u0440\u043e\u0436\u0434\u0435\u043d\u0438\u044f \u0432 \u0440\u0430\u0437\u043d\u044b\u0435 \u0433\u043e\u0434\u044b \u043f\u0440\u0438\u0445\u043e\u0434\u0438\u0442\u0441\u044f \u043d\u0430 \u0440\u0430\u0437\u043d\u044b\u0435 \u0434\u043d\u0438\u003cbr\u003e\u043d\u0435\u0434\u0435\u043b\u0438 \u003cb\u003e\u041c\u043e\u043b\u043e\u0434\u0435\u0446\u003c/b\u003e!\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-28-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": 1321.4909645785983, "y": 1456.082742048132}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-69-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u0412 \u043f\u0440\u0438\u0445\u043e\u0436\u0435\u0439 \u0440\u0430\u0437\u0434\u0430\u043b\u0438\u0441\u044c \u0448\u0430\u0433\u0438, \u043e\u0442\u043a\u0430\u0448\u043b\u0438\u0432\u0430\u043d\u044c\u0435 \u0432 \u043a\u0443\u043b\u0430\u043a \u0438 \u0432 \u0437\u0430\u043b\u0443 \u0432\u043e\u0448\u043b\u0438\u003cbr\u003e\u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0446\u044b\u003c/b\u003e \u0418\u0432\u0430\u043d\u0430 \u041b\u0443\u043a\u0438\u0447\u0430.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-69-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": -1232.087035819253, "y": -466.11356747746174}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-81-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u0418 \u0435\u043c\u0443 \u0445\u043e\u0442\u0435\u043b\u043e\u0441\u044c, \u0447\u0442\u043e\u0431\u044b \u0441\u0430\u043c \u0418\u0433\u043d\u0430\u0442\u044b\u0447 \u0435\u043c\u0443 \u0432 \u043b\u0438\u0446\u043e \u043f\u0440\u044f\u043c\u043e \u0441\u043a\u0430\u0437\u0430\u043b, \u0447\u0442\u043e\u003cbr\u003e\u043e\u043d \u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0435\u0446\u003c/b\u003e, \u0430\u043a\u043a\u0443\u0440\u0430\u0442\u0438\u0441\u0442 \u0438 \u043f\u0435\u0440\u0432\u044b\u0439 \u0432 \u0437\u0430\u0432\u043e\u0434\u0435 \u0442\u043e\u043a\u0430\u0440\u044c.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-81-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": 1190.4986722778563, "y": -1536.9334707382932}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-80-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cb\u003e\u041c\u043e\u043b\u043e\u0434\u0446\u044b\u003c/b\u003e \u0413\u0443\u043a\u043e\u0432\u0441\u043a\u043e\u0433\u043e \u0441\u043c\u0435\u044f\u043b\u0438\u0441\u044c \u043d\u0430\u0434 \u0435\u0433\u043e \u043c\u0435\u0442\u0430\u043d\u044c\u0435\u043c \u0438\u0437 \u0441\u0442\u043e\u0440\u043e\u043d\u044b\u003cbr\u003e\u0432 \u0441\u0442\u043e\u0440\u043e\u043d\u0443, \u0447\u0442\u043e \u0442\u043e \u043f\u0440\u044f\u0442\u0430\u043b\u0438, \u043d\u0430\u0433\u043b\u043e \u043e\u0442\u0432\u0435\u0447\u0430\u044f \u0435\u043c\u0443...\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-80-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": 196.3267444411253, "y": -1980.308353233189}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-79-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u041a\u0442\u043e \u0443\u0441\u0442\u043e\u0438\u0442, \u0442\u043e\u0433\u043e \u0431\u0440\u0430\u043b \u043a \u0441\u0435\u0431\u0435 \u0432 \u0434\u0440\u0443\u0436\u0438\u043d\u0443, \u0438 \u0442\u0430\u043a\u0438\u043c \u043e\u0431\u0440\u0430\u0437\u043e\u043c \u043e\u043a\u0440\u0443\u0436\u0438\u043b\u003cbr\u003e\u0441\u0435\u0431\u044f \u0442\u043e\u043b\u043f\u043e\u0439 \u0443\u0434\u0430\u043b\u044b\u0445 \u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0446\u0435\u0432\u003c/b\u003e, \u043c\u0435\u0436\u0434\u0443 \u043a\u043e\u0442\u043e\u0440\u044b\u043c\u0438 \u043e\u0441\u043e\u0431\u0435\u043d\u043d\u043e\u003cbr\u003e\u043f\u0440\u043e\u0441\u043b\u0430\u0432\u0438\u043b\u0438\u0441\u044c \u041a\u043e\u0441\u0442\u044f \u041d\u043e\u0432\u043e\u0442\u043e\u0440\u0436\u0430\u043d\u0438\u043d, \u041f\u043e\u0442\u0430\u043d\u044e\u0448\u043a\u0430 \u0425\u0440\u043e\u043c\u0435\u043d\u044c\u043a\u0438\u0439, \u0425\u043e\u043c\u0443\u043c\u0438\u0448\u043a\u0430\u003cbr\u003e\u0413\u043e\u0440\u0431\u0430\u0442\u0435\u043d\u044c\u043a\u0438\u0439, \u0422\u043e\u043b\u0441\u0442\u044b\u0439 \u0424\u043e\u043c\u0430 \u0411\u043b\u0430\u0433\u043e\u0443\u0440\u043e\u0434\u043b\u0438\u0432\u044b\u0439.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-79-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": -612.7866441668792, "y": -1906.3636463824184}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-75-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u0418 \u0446\u0430\u0440\u0435\u0432\u043d\u044b \u043d\u0430\u0432\u0435\u0440\u0445, \u0443\u0436 \u043a\u0440\u0435\u043f\u043a\u043e \u0438\u0445 \u0434\u0435\u0440\u0436\u0430\u0442, \u0430 \u0447\u0435\u0440\u043d\u0446\u043e\u0432 \u0434\u0430 \u0443\u0440\u043e\u0434\u043e\u0432\u003cbr\u003e\u0437\u043e\u0432\u0443\u0442 \u0432 \u0440\u044f\u0434\u043d\u0435, \u0432 \u0432\u0435\u0440\u0438\u0433\u0430\u0445, \u0441\u043a\u0438\u043d\u0443\u0442 \u0440\u0443\u0431\u0438\u0449\u0430 \u0434\u0430 \u0445\u0430\u0440\u0438 \u043f\u0438\u0441\u0430\u043d\u044b\u0435, \u0433\u043b\u044f\u043d\u044c -- \u043f\u043e\u0434\u003cbr\u003e\u043d\u0438\u043c\u0438 \u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0446\u044b\u003c/b\u003e -- \u0432\u0435\u0434\u0438 \u0432 \u0442\u0435\u0440\u0435\u043c!\"\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-75-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": 616.5589539334906, "y": -1136.8798076452535}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-31-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u0412 \u043e\u043a\u043d\u0430\u0445 \u0432\u0441\u0435 \u0434\u0438\u0432\u0438\u043b\u0438\u0441\u044c, \u043d\u0430\u0440\u043e\u0434 \u043e\u0441\u0442\u0430\u043d\u0430\u0432\u043b\u0438\u0432\u0430\u043b\u0441\u044f \u0438 \u043e\u0434\u043d\u043e \u0433\u043e\u0432\u043e\u0440\u0438\u043b: \"\u0410\u0445,\u003cbr\u003e\u043b\u043e\u0448\u0430\u0434\u044c! \u0430\u0445 \u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0435\u0446\u003c/b\u003e! \u043d\u0443 \u0443\u0436 \u043d\u0435\u0447\u0435\u0433\u043e \u0441\u043a\u0430\u0437\u0430\u0442\u044c! \u044d\u043d\u0430! \u044d\u043d\u0430!\"\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-31-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": -430.57857281529715, "y": 1897.03719116005}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-74-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u041a\u043e\u0433\u0434\u0430 \u043f\u0435\u043b\u0438 \u0442\u044f\u0433\u0443\u0447\u0438\u0435, \u0433\u0440\u0443\u0441\u0442\u043d\u044b\u0435 \u043f\u0435\u0441\u043d\u0438, \u043a\u0430\u0437\u0430\u043b\u043e\u0441\u044c, \u0447\u0442\u043e \u043a\u0430\u043c\u0435\u043d\u043d\u044b\u0435\u003cbr\u003e\u0441\u0442\u0435\u043d\u044b \u0442\u0440\u0430\u043a\u0442\u0438\u0440\u043e\u0432 \u0441\u0436\u0438\u043c\u0430\u044e\u0442\u0441\u044f \u0438 \u0434\u0443\u0448\u0430\u0442, \u0430 \u043a\u043e\u0433\u0434\u0430 \u0445\u043e\u0440 \u043f\u0435\u043b \u0431\u043e\u0439\u043a\u043e, \u0443\u0434\u0430\u043b\u043e \u0438\u003cbr\u003e\u043f\u0435\u0441\u0442\u0440\u043e \u043e\u0434\u0435\u0442\u044b\u0435 \u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0446\u044b\u003c/b\u003e \u043f\u043b\u044f\u0441\u0430\u043b\u0438 -- \u0441\u0442\u0435\u043d\u044b \u0442\u043e\u0447\u043d\u043e \u0432\u0435\u0442\u0435\u0440 \u043a\u043e\u043b\u0435\u0431\u0430\u043b \u0438\u003cbr\u003e\u0440\u0430\u0437\u0434\u0443\u0432\u0430\u043b.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-74-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": 587.0417562081088, "y": -1123.362335651143}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-64-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u0417\u0430\u043f\u0430\u0441\u043d\u044b\u0435 \u043b\u0430\u043a\u043e\u0432\u044b\u0435 \u0441\u0430\u043f\u043e\u0433\u0438 \u043f\u0440\u043e\u0441\u0438\u043b\u0438\u0441\u044c \u043d\u0435 \u0432 \u041c\u043e\u0441\u043a\u0432\u0443,\u003cbr\u003e\u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0446\u0430\u043c\u0438\u003c/b\u003e-\u0441\u043a\u043e\u0440\u043e\u0445\u043e\u0434\u0430\u043c\u0438, \u0430 \u0441\u043a\u043e\u0440\u0435\u0435 \u043d\u0430 \u0431\u0430\u0437\u0430\u0440.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-64-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": -1071.2012847195663, "y": 640.5035986692975}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-63-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u0412\u0441\u0442\u0440\u0435\u0442\u0438\u043b\u0438 \u0435\u0433\u043e \u0434\u0432\u0430 \u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0446\u0430\u003c/b\u003e \u041c\u0430\u0439\u043a\u043b \u0438 \u0414\u0436\u043e\u043d \u0438 \u0438\u0445 \u043c\u0430\u043c\u0430\u003cbr\u003e\u041c\u044d\u0440\u0438.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-63-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": 1428.835228813835, "y": -865.1751573723338}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-62-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u0416\u0434\u0430\u043d\u043e\u0432\u0430 \u041f. \u041d. \u0441\u043a\u0430\u0437\u0430\u043b\u0430, \u0447\u0442\u043e \u0431\u044b\u043b\u0430 \u0431\u044b \u043f\u043e\u043c\u043e\u043b\u043e\u0436\u0435 \u0432\u043b\u044e\u0431\u0438\u043b\u0430\u0441\u044c \u0431\u044b \u0432\u003cbr\u003e\u041f\u0435\u0442\u0440\u0430 \u041a\u0443\u0437\u044c\u043c\u0438\u0447\u0430, \u043a\u043e\u0442\u043e\u0440\u044b\u0439 \u0442\u0430\u043a\u043e\u0439 \u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0435\u0446\u003c/b\u003e (\u043d\u0430 40 \u043b\u0435\u0442\u003cbr\u003e\u0432\u044b\u0433\u043b\u044f\u0434\u0438\u0442).\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-62-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": 1627.9343018915313, "y": -832.1484395040798}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-59-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u041f\u0440\u0438\u043a\u043e\u0432\u044b\u0432\u0430\u0435\u0442 \u0438 \u0432\u0435\u043b\u0438\u043a\u043e\u043b\u0435\u043f\u043d\u043e \u043d\u0430\u043f\u0438\u0441\u0430\u043d\u043d\u044b\u0439 (\u0443\u0436\u0435 \u0437\u0430 \u0433\u0440\u0430\u043d\u0438\u0446\u0435\u0439)\u003cbr\u003e\u043f\u043e\u0441\u043b\u0435\u0434\u043d\u0438\u0439 \u0440\u0430\u0437\u0434\u0435\u043b \u043a\u043d\u0438\u0433\u0438 -- \"\u041f\u0440\u0438\u0448\u043b\u043e \u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0446\u0443\u003c/b\u003e \u043a \u043a\u043e\u043d\u0446\u0443\", \u0433\u0434\u0435 \u0430\u0432\u0442\u043e\u0440\u003cbr\u003e\u0440\u0430\u0441\u0441\u043a\u0430\u0437\u044b\u0432\u0430\u0435\u0442 \u043e \u0441\u0430\u043c\u044b\u0445 \u0434\u0440\u0430\u043c\u0430\u0442\u0438\u0447\u0435\u0441\u043a\u0438\u0445 \u043d\u0435\u0434\u0435\u043b\u044f\u0445 \u0441\u0432\u043e\u0435\u0439 \u0436\u0438\u0437\u043d\u0438 -- \u043e\u0442\u003cbr\u003e\u043f\u0443\u0431\u043b\u0438\u043a\u0430\u0446\u0438\u0438 \u043f\u0435\u0440\u0432\u043e\u0433\u043e \u0442\u043e\u043c\u0430 \"\u0410\u0440\u0445\u0438\u043f\u0435\u043b\u0430\u0433\u0430\" \u0434\u043e \u0432\u044b\u0441\u044b\u043b\u043a\u0438 \u0438\u0437 \u0421\u0421\u0421\u0420.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-59-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": 1618.274709705992, "y": -394.98126088166407}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-58-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u0412\u0435\u0440\u0438\u0442 \u043d\u0430\u0440\u043e\u0434 \u0438\u0441\u0442\u0446\u0443 \u0434\u0430 \u0443\u0434\u0430\u043b\u043e\u043c\u0443 \u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0446\u0443\u003c/b\u003e!\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-58-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": 1694.378439463831, "y": -413.5293389694616}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-57-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e-- \u003cb\u003e\u041c\u043e\u043b\u043e\u0434\u0435\u0446\u003c/b\u003e, \u0447\u0442\u043e \u0434\u043e\u0433\u0430\u0434\u0430\u043b\u0441\u044f.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-57-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": -734.5523922281616, "y": -932.5598828964488}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-56-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u0412 \u0441\u0442\u043e\u043b\u043e\u0432\u0443\u044e, \u043d\u0430 \u043f\u0430\u0440\u043a\u0435\u0442, \u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0446\u044b\u003c/b\u003e-\u043f\u043b\u043e\u0442\u043d\u0438\u043a\u0438, \u0432 \u0440\u043e\u0434\u043e\u0432\u044b\u0445\u003cbr\u003e\u0440\u0443\u0431\u0430\u0445\u0430\u0445, \u0447\u0438\u0441\u0442\u044b\u0435, \u0440\u0443\u0441\u044b\u0435, \u044f\u0441\u043d\u043e\u0433\u043b\u0430\u0437\u044b\u0435, \u043f\u0430\u0445\u043d\u0443\u0449\u0438\u0435 \u0431\u0435\u0440\u0435\u0437\u043e\u0439 \u0431\u0430\u043d\u043d\u043e\u0439,\u003cbr\u003e\u0432\u0442\u0430\u0441\u043a\u0438\u0432\u0430\u044e\u0442 \u043e\u0433\u0440\u043e\u043c\u043d\u044b\u0439 \u0440\u043e\u0433\u043e\u0436\u043d\u044b\u0439 \u0442\u044e\u043a \u0441 \u0432\u044b\u043f\u0438\u0440\u0430\u044e\u0449\u0435\u0439 \u0438\u0437 \u043d\u0435\u0433\u043e \u0441\u043e\u043b\u043e\u043c\u043e\u0439, \u0438 \u0441\u0440\u0430\u0437\u0443\u003cbr\u003e\u0441\u043b\u044b\u0448\u043d\u043e, \u043a\u0430\u043a \u0441\u043b\u0430\u0434\u043a\u043e \u0437\u0430\u043f\u0430\u0445\u043b\u043e \u044f\u0431\u043b\u043e\u043a\u043e\u043c.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-56-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": -1342.3797446785945, "y": 1265.8108742982836}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-65-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e-- \u0410 \u0432\u0441\u0435 \u0432\u0438\u043d\u043e, \u0432\u0438\u043d\u043e, \u0434\u0435\u0432\u0443\u0448\u043a\u0438, \u043d\u0435 \u0431\u044b\u043b\u043e \u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0446\u0430\u003c/b\u003e \u043f\u043e\u0431\u043e\u0440\u043e\u0442\u044c\u003cbr\u003e\u0432\u0438\u043d\u0446\u0430!\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-65-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": 1170.3082476169948, "y": 745.0760655848945}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-32-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e-- \u0422\u044b -- \u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0435\u0446\u003c/b\u003e, \u0434\u043e\u0431\u0440\u043e\u0435 \u0434\u0435\u043b\u043e \u0434\u0435\u043b\u0430\u0435\u0448\u044c.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-32-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": -1756.1833320884905, "y": -639.5613689531153}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-33-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u041f\u0440\u043e\u0444\u0435\u0441\u0441\u0438\u043e\u043d\u0430\u043b -- \u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0435\u0446\u003c/b\u003e, \u0443\u0433\u043b\u044f\u0434\u0435\u043b \u043b\u043e\u0448\u0430\u0434\u044c.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-33-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": -1784.617133918877, "y": -627.2272163648239}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-53-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e-- \u042d\u043a\u043e\u0439 \u0447\u0435\u0440\u0442! -- \u043a\u0440\u0438\u0447\u0430\u043b\u0438 \u0435\u043c\u0443 \u0432\u0441\u043b\u0435\u0434 \u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0446\u044b\u003c/b\u003e, -- \u043f\u0440\u044f\u043c\u0430\u044f\u003cbr\u003e\u0448\u0430\u043b\u0430\u0432\u0430!.. \u043f\u043e\u0433\u043e\u0434\u0438, \u043e\u0431\u0440\u043e\u043d\u0438\u043b \u0445\u0432\u043e\u0441\u0442 \u0443 \u043b\u043e\u0448\u0430\u0434\u0438.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-53-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": 1.81548652173743, "y": 341.32585859674685}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-9-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u041f\u0430\u0440\u0430 \u0431\u0435\u0436\u0438\u0442, \u0438 \u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0435\u0446\u003c/b\u003e \u043b\u043e\u0432\u0438\u0442 \u043f\u043e\u0434\u0440\u0443\u0433\u0443.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-9-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": -415.1861009942707, "y": -1760.3157616755213}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-7-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u0412\u043e\u0442 \u043a\u0442\u043e \u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0435\u0446\u003c/b\u003e -- \u0442\u0430\u043a \u044d\u0442\u043e \u044f: \u0447\u0442\u043e \u044f \u043d\u0438 \u043d\u0430\u0447\u043d\u0443 \u0434\u0435\u043b\u0430\u0442\u044c, \u0432\u0441\u0435\u003cbr\u003e\u0432\u044b\u0439\u0434\u0435\u0442 \u0445\u043e\u0440\u043e\u0448\u043e, \u0430 \u0443 \u0432\u0430\u0441 \u0441\u043d\u043e\u0440\u043e\u0432\u043a\u0438 \u043d\u0435\u0442.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-7-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": -1089.870143174309, "y": -1328.8662827797198}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-3-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cb\u003e\u041c\u043e\u043b\u043e\u0434\u0435\u0446\u003c/b\u003e \u0430\u043d\u0430\u0440\u0445\u0438\u0441\u0442!\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-3-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": 379.7761850301642, "y": 730.0006835323327}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-2-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e-- \u003cb\u003e\u041c\u043e\u043b\u043e\u0434\u0435\u0446\u003c/b\u003e, \u0420\u044d\u0441\u0441\u0438! -- \u043d\u0435 \u0432\u044b\u0434\u0435\u0440\u0436\u0430\u043b \u0421\u0435\u0440\u0433\u0435\u0439.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-2-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": 347.58567306922686, "y": 734.7391323745928}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-1-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u041e\u043d\u0430, \u043b\u044e\u0431\u043e\u0432\u043d\u043e \u0441\u043c\u043e\u0442\u0440\u044f \u043d\u0430 \u043d\u0435\u0433\u043e, \u043f\u043e\u043d\u0438\u043c\u0430\u043b\u0430, \u0447\u0442\u043e \u0432 \u0442\u0430\u043a\u043e\u0433\u043e\u003cbr\u003e\u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0446\u0430\u003c/b\u003e \u043a\u0430\u0436\u0434\u0430\u044f \u043c\u043e\u0436\u0435\u0442 \u0432\u043b\u044e\u0431\u0438\u0442\u044c\u0441\u044f.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-1-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": 1808.8775474184445, "y": -984.7431594426228}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-119-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u0421\u043e\u0431\u0438\u0440\u0430\u0435\u0442\u0441\u044f \u043b\u0438 \u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0435\u0446\u003c/b\u003e \u0436\u0435\u043d\u0438\u0442\u044c\u0441\u044f, \u0435\u0433\u043e \u0441\u0432\u0430\u0442\u0430\u043d\u044c\u0435, \u0434\u0435\u0432\u0438\u0448\u043d\u0438\u043a,\u003cbr\u003e\u0441\u0432\u0430\u0434\u044c\u0431\u0430 -- \u0432\u0441\u0435 \u044d\u0442\u043e \u043d\u0435\u043f\u0440\u0435\u043c\u0435\u043d\u043d\u043e \u043e\u0433\u043b\u0430\u0448\u0430\u0435\u0442\u0441\u044f \u043f\u0435\u0441\u043d\u044f\u043c\u0438, \u0433\u043e\u0442\u043e\u0432\u044b\u043c\u0438 \u043d\u0430\u0440\u043e\u0447\u043d\u043e \u043d\u0430\u003cbr\u003e\u044d\u0442\u043e\u0442 \u0441\u043b\u0443\u0447\u0430\u0439.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-119-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": 1122.3626101381763, "y": -1386.9742734542335}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-25-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u041e\u043d \u043f\u0440\u0438\u0432\u0435\u0437 \u0441\u0435\u0431\u0435 \u043d\u0430 \u043f\u043e\u0434\u043c\u043e\u0433\u0443 \u0435\u0449\u0435 \u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0446\u0430\u003c/b\u003e \u0438\u0437 \u043b\u0430\u0432\u043a\u0438 -- \u0441\u003cbr\u003e\u043a\u043e\u0440\u043e\u0442\u043a\u043e\u0439 \u0431\u044b\u0447\u044c\u0435\u0439 \u0448\u0435\u0435\u0439 \u0438 \u0442\u0443\u043f\u044b\u043c \u043b\u0431\u043e\u043c.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-25-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": -1912.05837191067, "y": 654.5300756383253}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-39-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e-- \u0421\u0442\u0438\u0448\u043a\u0438 \u003cb\u003e\u041c\u043e\u043b\u043e\u0434\u0435\u0446\u003c/b\u003e.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-39-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": -1772.106383289423, "y": -241.33366570564837}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-51-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u041a\u043e\u043b\u0445\u043e\u0437\u043d\u044b\u0435 \u0440\u0435\u0431\u044f\u0442\u0430 \u0441 \u0437\u0430\u0432\u0438\u0441\u0442\u044c\u044e \u0441\u043c\u043e\u0442\u0440\u0435\u043b\u0438 \u043d\u0430 \u044d\u0442\u0438\u0445 \u043c\u043e\u043b\u043e\u0434\u0446\u043e\u0432 \u0432\u003cbr\u003e\u0433\u043e\u0440\u043e\u0434\u0441\u043a\u0438\u0445 \u043a\u043e\u0441\u0442\u044e\u043c\u0430\u0445, \u0432 \u0441\u043e\u043b\u043e\u043c\u0435\u043d\u043d\u044b\u0445, \u0441 \u0447\u0435\u0440\u043d\u043e\u0439 \u043b\u0435\u043d\u0442\u043e\u0439 \u0448\u043b\u044f\u043f\u0430\u0445, \u0441 \u043d\u043e\u0432\u0435\u043d\u044c\u043a\u0438\u043c\u0438\u003cbr\u003e\u0447\u0430\u0441\u0430\u043c\u0438 \u043d\u0430 \u0440\u0443\u043a\u0430\u0445, \u043a\u043e\u0433\u0434\u0430 \u043e\u043d\u0438 \u0440\u0430\u0437 \u0432 \u043c\u0435\u0441\u044f\u0446 \u043f\u0440\u0438\u0435\u0437\u0436\u0430\u043b\u0438 \u043d\u0430 \u043f\u043e\u0431\u044b\u0432\u043a\u0443 \u0434\u043e\u043c\u043e\u0439,\u003cbr\u003e\u0443\u0433\u043e\u0449\u0430\u043b\u0438 \u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0435\u0436\u044c\u003c/b\u003e \u0432\u0438\u043d\u043e\u043c, \u0430 \u0441\u0442\u0430\u0440\u0438\u043a\u043e\u0432 -- \u0437\u0430\u043d\u0438\u043c\u0430\u0442\u0435\u043b\u044c\u043d\u044b\u043c\u0438 \u0440\u0430\u0441\u0441\u043a\u0430\u0437\u0430\u043c\u0438\u003cbr\u003e\u0438 \u0432 \u0441\u0432\u043e\u0431\u043e\u0434\u043d\u043e\u0435 \u0432\u0440\u0435\u043c\u044f \u0441\u043d\u0438\u0441\u0445\u043e\u0434\u0438\u0442\u0435\u043b\u044c\u043d\u043e \u043f\u043e\u0443\u0447\u0430\u043b\u0438 \u043a\u043e\u043b\u0445\u043e\u0437\u043d\u044b\u0445 \u0442\u0440\u0430\u043a\u0442\u043e\u0440\u0438\u0441\u0442\u043e\u0432\u003cbr\u003e\u043d\u0430\u0441\u0447\u0435\u0442 \u0440\u0435\u043c\u043e\u043d\u0442\u0430 \u0438 \u043f\u0440\u043e\u0444\u0438\u043b\u0430\u043a\u0442\u0438\u043a\u0438.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-51-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": 649.0320803736106, "y": 1768.7044160111516}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-50-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u0411\u043e\u043b\u0435\u0435 \u0442\u043e\u0433\u043e, \u042d\u0434 \u0441\u043a\u043e\u0440\u0435\u0435 \u0432\u044b\u0433\u043b\u044f\u0434\u0435\u043b \u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0446\u043e\u043c\u003c/b\u003e, \u0431\u0440\u043e\u0441\u0438\u0432\u0448\u0438\u043c\u0441\u044f \u043d\u0430\u003cbr\u003e\u0432\u0440\u0430\u0433\u0430, \u0438 \u0442\u043e\u043b\u044c\u043a\u043e \u043f\u043e\u0442\u043e\u043c\u0443, \u0447\u0442\u043e \u0432\u0440\u0430\u0433 \u0431\u044b\u043b \u043c\u043d\u043e\u0433\u043e \u0441\u0442\u0430\u0440\u0448\u0435 \u0438 \u0441\u0438\u043b\u044c\u043d\u0435\u0435,\u003cbr\u003e\u043f\u043e\u043b\u0443\u0447\u0438\u0432\u0448\u0438\u043c \u0443\u0434\u0430\u0440 \u043f\u043e \u0441\u043a\u0443\u043b\u0435.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-50-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": 1003.7149298160997, "y": 1621.9238268549905}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-49-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e-- \u0411\u0440\u0430\u0432\u043e, \u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0435\u0446\u003c/b\u003e!\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-49-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": -947.6789560938654, "y": 1647.6353839107283}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-48-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u0410\u043b\u0435\u043a\u0441\u0430\u043d\u0434\u0440\u0430 \u0418\u0432\u0430\u043d\u043e\u0432\u0438\u0447\u0430 \u0435\u0435 \u043e\u0442\u0435\u0446 \u0432\u0441\u0435\u0433\u0434\u0430 \u0430\u0442\u0442\u0435\u0441\u0442\u043e\u0432\u0430\u043b \u043a\u0430\u043a \u043e\u0431\u0440\u0430\u0437\u0446\u043e\u0432\u043e\u0433\u043e\u003cbr\u003e\u043e\u0444\u0438\u0446\u0435\u0440\u0430, \u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0446\u0430\u003c/b\u003e \u0432\u043e \u0432\u0441\u0435\u0445 \u043e\u0442\u043d\u043e\u0448\u0435\u043d\u0438\u044f\u0445, \u0438 \u043e\u043d\u0430 \u0431\u043b\u0430\u0433\u043e\u0433\u043e\u0432\u0435\u043b\u0430 \u043f\u0435\u0440\u0435\u0434\u003cbr\u003e\u043d\u0438\u043c.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-48-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": -996.6376152488532, "y": 1728.9604016108347}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-45-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e-- \u0410 \u0432\u043e\u0442 \u043c\u0430\u0442\u044c \u0443 \u0442\u0435\u0431\u044f, \u0432\u0438\u0434\u0430\u0442\u044c, \u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0435\u0446\u003c/b\u003e!\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-45-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": 824.0222540147, "y": 144.9091043294784}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-44-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cb\u003e\u041c\u043e\u043b\u043e\u0434\u0435\u0446\u003c/b\u003e \u043f\u0430\u0440\u0435\u043d\u044c!\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-44-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": 836.6036662821493, "y": 114.69145757356569}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-41-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u041e\u043d \u0441\u043c\u043e\u0442\u0440\u0438\u0442 \u0432\u043e\u0432\u0441\u0435 \u043d\u0435 \u0434\u0440\u0443\u0436\u0435\u043b\u044e\u0431\u043d\u043e \u043d\u0430 \u043f\u0440\u0438\u0435\u0445\u0430\u0432\u0448\u0438\u0445 \u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0446\u043e\u0432\u003c/b\u003e,\u003cbr\u003e\u0447\u0442\u043e \u043f\u044b\u0442\u0430\u043b\u0438\u0441\u044c \u0442\u0430\u043a \u0431\u0435\u0441\u0446\u0435\u0440\u0435\u043c\u043e\u043d\u043d\u043e \u0438 \u0441\u0430\u043c\u043e\u0443\u0432\u0435\u0440\u0435\u043d\u043d\u043e \u043f\u0440\u043e\u043b\u043e\u043c\u0438\u0442\u044c\u0441\u044f \u0432 \u0434\u0432\u0435\u0440\u0438 \u043a\u003cbr\u003e\u043a\u043e\u043c\u0430\u043d\u0434\u0443\u044e\u0449\u0435\u043c\u0443.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-41-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": -1418.7674949698498, "y": -1303.3172604615684}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-40-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cb\u003e\u041c\u043e\u043b\u043e\u0434\u0435\u0446\u003c/b\u003e, \u0411\u0430\u0445\u0443\u0448\u043a\u0430.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-40-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": -165.54281325460036, "y": -2000.0}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-38-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e...\u0418 \u043e\u0442\u043a\u0443\u0434\u0430 \u0437\u043d\u0430\u0442\u044c \u0431\u044b\u043b\u043e \u043e\u0441\u0438\u0440\u043e\u0442\u0435\u0432\u0448\u0435\u0439 \u0414\u0430\u0448\u0435\u043d\u044c\u043a\u0435, \u0447\u0442\u043e \u041c\u0438\u0442\u044f \u0435\u0451 \u0436\u0438\u0432,\u003cbr\u003e\u043d\u0435\u0432\u0440\u0435\u0434\u0438\u043c \u0412\u043e\u0442 \u043e\u043d \u0441\u0438\u0434\u0438\u0442 \u0432 \u0438\u0437\u0431\u0435 \u0441 \u043a\u0443\u0434\u0440\u044f\u0432\u044b\u043c \u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0446\u043e\u043c\u003c/b\u003e \u0418\u0432\u0430\u043d\u043e\u043c\u003cbr\u003e\u041f\u043e\u0447\u0438\u0442\u0430\u043b\u0438\u043d\u044b\u043c, \u0438 \u0432\u0435\u043b\u0435\u043d\u044c\u0435\u043c \u0433\u043e\u0441\u0443\u0434\u0430\u0440\u044f \u043e\u0431\u0430 \u0441\u043e\u0447\u0438\u043d\u044f\u044e\u0442 \u043c\u0430\u043d\u0438\u0444\u0435\u0441\u0442.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-38-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": -1858.3481029044717, "y": -200.84437946997556}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-13-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e-- \u041c\u0430\u0442\u044c \u0443 \u043d\u0430\u0441 \u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0435\u0446\u003c/b\u003e.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-13-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": 241.8043039036411, "y": -537.284391310276}, {"color": "blue", "date": "1918-1990", "id": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-23-12", "label": "0", "physics": false, "shape": "circle", "size": 10, "title": "\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u0411\u0430\u0440\u044b\u0448\u043d\u044f -- \u003cb\u003e\u043c\u043e\u043b\u043e\u0434\u0435\u0446\u003c/b\u003e, \u0437\u0430\u043c\u0435\u0442\u0438\u043b\u0430, \u0447\u0442\u043e \u0442\u044b \u0441 \u043d\u0435\u0435 \u0432\u043b\u044e\u0431\u043b\u0435\u043d\u043d\u044b\u0445\u003cbr\u003e\u0433\u043b\u0430\u0437 \u043d\u0435 \u0441\u0432\u043e\u0434\u0438\u0448\u044c, \u0430 \u043c\u043e\u043b\u0447\u0438\u0448\u044c, \u043a\u0430\u043a \u043f\u0435\u043d\u044c, \u0434\u0430\u0439, \u0434\u0443\u043c\u0430\u044e, \u0441\u0430\u043c\u0430 \u044d\u0442\u043e\u0433\u043e \u0440\u043e\u0431\u043a\u043e\u0433\u043e\u003cbr\u003e\u0432\u043e\u0438\u043d\u0430 \u043f\u043e\u0439\u043c\u0430\u044e.\u003cspan style=\"color:#808080;\"\u003e\u003c/span\u003e\u003cp style=\"font-size:8px;\"\u003e\u003cbr\u003edate: 1918-1990\u003cbr\u003egrouping: 2\u003cbr\u003eidentifier: \u043c\u043e\u043b\u043e\u0434\u0435\u0446-23-12\u003cbr\u003etype: usage\u003cbr\u003epos: NOUN\u003c/p\u003e", "x": -1673.780737677986, "y": 294.0632852325726}]);
+        edges = new vis.DataSet([{"color": "black", "from": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-114-12", "label": "4/4/4/4/4", "to": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-115-12", "weight": 4.0, "width": 4}, {"color": "black", "from": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-96-12", "label": "4/4/4/4/4", "to": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-97-12", "weight": 4.0, "width": 4}, {"color": "black", "from": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-12-12", "label": "4/4/4/3/4", "to": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-13-12", "weight": 4.0, "width": 4}, {"color": "black", "from": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-29-12", "label": "4/4/4/4/2", "to": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-28-12", "weight": 4.0, "width": 4}, {"color": "black", "from": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-75-12", "label": "4/4/4/4/4", "to": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-74-12", "weight": 4.0, "width": 4}, {"color": "black", "from": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-59-12", "label": "1/4/3/3/1", "to": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-58-12", "weight": 3.0, "width": 4}, {"color": "black", "from": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-32-12", "label": "4/4/1/4/4", "to": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-33-12", "weight": 4.0, "width": 4}, {"color": "black", "from": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-3-12", "label": "1/4/4/4/4", "to": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-2-12", "weight": 4.0, "width": 4}, {"color": "black", "from": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-49-12", "label": "1/3/1/4/3", "to": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-48-12", "weight": 3.0, "width": 4}, {"color": "black", "from": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-45-12", "label": "4/4/4/4/4", "to": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-44-12", "weight": 4.0, "width": 4}, {"color": "lightgray", "from": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-18-12", "label": "4/1/1/2/1", "to": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-19-12", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-105-12", "label": "2/1/1/4/4", "to": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-104-12", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-94-12", "label": "4/1/1/3/1", "to": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-95-12", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-81-12", "label": "1/1/1/1/1", "to": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-80-12", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-64-12", "label": "1/1/3/4/1", "to": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-65-12", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-63-12", "label": "4/1/2/2/3", "to": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-62-12", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-57-12", "label": "1/1/1/1/1", "to": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-56-12", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-39-12", "label": "1/2/1/4/4", "to": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-38-12", "weight": 2.0, "width": 2}, {"color": "lightgray", "from": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-51-12", "label": "1/1/1/2/2", "to": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-50-12", "weight": 1.0, "width": 2}, {"color": "lightgray", "from": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-41-12", "label": "1/1/1/1/1", "to": "\u043c\u043e\u043b\u043e\u0434\u0435\u0446-40-12", "weight": 1.0, "width": 2}]);
+
+        // adding nodes and edges to the graph
+        data = { nodes: nodes, edges: edges };
+
+        var options = {
+    "configure": {
+        "enabled": true,
+        "filter": [
+            "nodes",
+            "edges"
+        ]
+    },
+    "edges": {
+        "color": {
+            "inherit": false
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": false,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+        
+
+        
+        // if this network requires displaying the configure window,
+        // put it in its div
+        options.configure["container"] = document.getElementById("config");
+        
+
+        network = new vis.Network(container, data, options);
+
+        
+
+
+        
+
+        return network;
+
+    }
+
+        drawGraph();
+
+
+        let nodesInTimePeriod = new Set();
+        let edgesInTimePeriod = new Set();
+        let edgesBelowWeight = new Set();
+        let nodesInGrouping = new Set();
+        let edgesInGrouping = new Set();
+        let edgesToBeShown = new Set();
+        let nodesToBeShown = new Set();
+
+        edges.forEach(function (edge) {
+            edgesBelowWeight.add(edge.id);
+            edgesInGrouping.add(edge.id);
+            edgesInTimePeriod.add(edge.id);
+            edgesToBeShown.add(edge.id);
+        })
+
+        nodes.forEach(function (node) {
+            nodesInTimePeriod.add(node.id);
+            nodesInGrouping.add(node.id);
+            nodesToBeShown.add(node.id);
+        })
+
+
+        function showEdges() {
+            edgesToBeShown.forEach(function (edge) {
+                edge.hidden = false;
+                edges.update(edge);
+            })
+        }
+
+        //Missing the loading icon
+        //slider code from pyvis filter example
+        // Handler event when slider changes
+
+        let slider = document.getElementById('slider');
+        let sliderMin = document.getElementById('slider-min');
+        let sliderDisplay = document.getElementById('sliderValueDisplay');
+        let sliderMinDisplay = document.getElementById('sliderValueDisplayMin');
+
+        sliderDisplay.innerHTML = "4";
+        sliderMinDisplay.innerHTML = "1";
+
+        function weightFilter() {
+            console.log("weight filter got called");
+            // Get the value of the slider
+            let sliderValue = slider.value;
+            let sliderMinValue = sliderMin.value;
+
+            // Display the selected value next to slider
+            sliderDisplay.innerHTML = sliderValue;
+            sliderMinDisplay.innerHTML = sliderMinValue;
+
+            // Loop through the edges
+            edges.forEach(function (edge) {
+                // Check if the edge should be displayed based on its weight
+                if (edge.weight <= sliderValue && edge.weight >= sliderMinValue) {
+                    if (!nodes.get(edge.to).hidden && !nodes.get(edge.from).hidden) {
+                        edgesBelowWeight.add(edge.id);
+                        edge.hidden = false;
+                        edges.update(edge);
+                    }
+                    // Edge should be displayed
+                    // Unhide edge if it's hidden and update DataSet
+
+                } else if (isNaN(edge.weight)) {
+                    //console.log("its NaN")
+                } else {
+
+                    // Edge should not be displayed
+                    // Hide edge if not already hidden and update DataSet
+                    if (!edge.hidden) {
+                        edgesBelowWeight.delete(edge.id);
+                        edge.hidden = true;
+                        edges.update(edge);
+                    }
+                }
+            });
+
+
+            calcMean();
+        }
+
+
+
+        //code for node date filter
+        let dates = [];
+        nodes.forEach(function (node) {
+            date = node.date;
+            if (!dates.includes(date)) {
+                dates.push(date);
+            }
+        });
+        dates.sort();
+
+
+        //code for date slider
+        let minDate = 10000;
+        let maxDate = 0;
+
+        let minPicker = document.getElementById('minPicker');
+        let maxPicker = document.getElementById('maxPicker');
+
+        if (!minPicker.hasChildNodes()) {
+            dates.forEach(function (date) {
+                if (Number(date) < minDate) {
+                    minDate = Number(date);
+                }
+                if (Number(date) > maxDate) {
+                    maxDate = Number(date);
+                }
+
+
+                let option = document.createElement('option');
+                option.text = date;
+                option.value = date;
+
+                let option2 = document.createElement('option');
+                option2.text = date;
+                option2.value = date;
+
+                minPicker.append(option);
+                maxPicker.append(option2);
+
+            })
+        } else {
+            minDate = Number(dates[0]);
+            maxDate = Number(dates[dates.length-1]);
+        }
+        maxPicker.selectedIndex = dates.length - 1;
+
+
+
+        function showSelectLoad() {
+            return new Promise(function (resolve) {
+                loadingIcon.style.visibility = 'visible';
+                resolve();
+            });
+        }
+
+        function hideSelectLoad() {
+            return new Promise(function (resolve) {
+                loadingIcon.style.visibility = 'hidden';
+                resolve();
+            });
+        }
+
+
+
+        const loadingIcon = document.querySelector('.loading-icon');
+        const select = document.querySelector('.select-load');
+
+        select.addEventListener('change', function () {
+            showSelectLoad();
+            setTimeout(selectGroup, 1000);
+
+
+            setTimeout(hideSelectLoad, 1000);
+
+
+        });
+
+        //const slider_load = document.querySelector('.slider-load');
+
+         slider.addEventListener('change', function() {
+            showSelectLoad();
+            setTimeout(weightFilter,1000);
+
+
+            setTimeout(hideSelectLoad, 1000);
+
+
+        });
+
+         sliderMin.addEventListener('change', function() {
+            showSelectLoad();
+            setTimeout(weightFilter,1000);
+
+
+            setTimeout(hideSelectLoad, 1000);
+
+
+        });
+
+        let groupPicker = document.getElementById('groupPicker');
+        groupPicker.selectedIndex = 0;
+        let minValue = minPicker.value;
+        let maxValue = maxPicker.value;
+
+        function selectGroup() {
+            return new Promise(function (resolve, reject) {
+                let selectValue = document.getElementById('groupPicker').value;
+
+                console.log("grouping value: " + selectValue);
+
+                if (selectValue == 1) {
+                    nodes.forEach(function (node) {
+
+
+                        if (node.title.includes("grouping: 1") && Number(node.date) >= Number(minValue) && Number(node.date) <= Number(maxValue) && (Number(node.label) !== -1 || (Number(node.label) == -1 && showNoiseLabels))) {
+                            node.hidden = false;
+                            nodes.update(node);
+                        } else {
+                            node.hidden = true;
+                            nodes.update(node);
+                        }
+                    })
+                } else if (selectValue == 2) {
+                    nodes.forEach(function (node) {
+                        if (node.title.includes("grouping: 2") && Number(node.date) >= Number(minValue) && Number(node.date) <= Number(maxValue) && (Number(node.label) !== -1 || (Number(node.label) == -1 && showNoiseLabels))) {
+                            node.hidden = false;
+                            nodes.update(node);
+                        } else {
+                            node.hidden = true;
+                            nodes.update(node);
+                        }
+                    })
+                } else {
+                    nodes.forEach(function (node) {
+                        if (Number(node.date) >= Number(minValue) && Number(node.date) <= Number(maxValue) && (Number(node.label) !== -1 || (Number(node.label) == -1 && showNoiseLabels))) {
+                            node.hidden = false;
+                            nodes.update(node);
+                        } else {
+                            node.hidden = true;
+                            nodes.update(node);
+                        }
+                    })
+                }
+                loadingIcon.style.visibility = 'hidden';
+
+                edges.forEach(function (edge) {
+                    if (isNaN(edge.weight)) {
+                        if (showNaNEdges && !nodes.get(edge.to).hidden && !nodes.get(edge.from).hidden) {
+
+                            edge.hidden = false;
+                            edges.update(edge);
+                        } else {
+                            edge.hidden = true;
+                            edge.hidden = true;
+                            edges.update(edge);
+                        }
+                    } else if (!nodes.get(edge.to).hidden && !nodes.get(edge.from).hidden && !isNaN(edge.weight)) {
+                        edgesInGrouping.add(edge.id);
+                        edge.hidden = false;
+                        edges.update(edge);
+                    } else {
+                        edgesInGrouping.delete(edge.id);
+                        edge.hidden = true;
+                        edges.update(edge);
+                    }
+
+
+                })
+                loadingIcon.style.visibility = 'hidden';
+                calcMean();
+                updateClusterDistribution();
+                resolve();
+            });
+
+        }
+
+        function dateFilter() {
+            showSelectLoad();
+            setTimeout(pickDates, 1000);
+
+
+            setTimeout(hideSelectLoad, 2000);
+
+
+        }
+
+        function pickDates() {
+            loadingIcon.style.visibility = 'visible';
+
+            let selectValue = document.getElementById('groupPicker').value;
+            minValue = minPicker.value;
+            maxValue = maxPicker.value;
+
+            //console.log("showing dates between " + minValue + " and " + maxValue);
+
+            if (selectValue == 1) {
+                nodes.forEach(function (node) {
+
+
+                    if (node.title.includes("grouping: 1") && Number(node.date) >= Number(minValue) && Number(node.date) <= Number(maxValue) && (Number(node.label) !== -1 || (Number(node.label) == -1 && showNoiseLabels))) {
+                        node.hidden = false;
+                        nodes.update(node);
+                    } else {
+                        node.hidden = true;
+                        nodes.update(node);
+                    }
+                })
+            } else if (selectValue == 2) {
+                nodes.forEach(function (node) {
+                    if (node.title.includes("grouping: 2") && Number(node.date) >= Number(minValue) && Number(node.date) <= Number(maxValue) && (Number(node.label) !== -1 || (Number(node.label) == -1 && showNoiseLabels))) {
+                        node.hidden = false;
+                        nodes.update(node);
+                    } else {
+                        node.hidden = true;
+                        nodes.update(node);
+                    }
+                })
+            } else {
+                nodes.forEach(function (node) {
+                    if (Number(node.date) >= Number(minValue) && Number(node.date) <= Number(maxValue) && (Number(node.label) !== -1 || (Number(node.label) == -1 && showNoiseLabels))) {
+                        node.hidden = false;
+                        nodes.update(node);
+                    } else {
+                        node.hidden = true;
+                        nodes.update(node);
+                    }
+                })
+            }
+
+            edges.forEach(function (edge) {
+
+
+                if (isNaN(edge.weight) && !showNaNEdges) {
+
+                } else if (!nodes.get(edge.to).hidden && !nodes.get(edge.from).hidden && isNaN(edge.weight)){
+                    edgesInTimePeriod.add(edge.id);
+                    edge.hidden = false;
+                    edges.update(edge);
+                } else if (!nodes.get(edge.to).hidden && !nodes.get(edge.from).hidden && edge.weight >= sliderMin.value && edge.weight <= slider.value) {
+                    edgesInTimePeriod.add(edge.id);
+                    edge.hidden = false;
+                    edges.update(edge);
+                } else {
+                    edgesInTimePeriod.delete(edge.id);
+                    edge.hidden = true;
+                    edges.update(edge);
+                }
+
+
+            })
+            loadingIcon.style.visibility = 'hidden'
+
+
+            calcMean();
+            updateClusterDistribution();
+
+        }
+
+        let showNaNEdges = true;
+
+        function filterNaN() {
+            showSelectLoad();
+            setTimeout(selectNaN, 1000);
+
+
+            setTimeout(hideSelectLoad, 1000);
+
+        };
+
+        const checkboxNaN = document.getElementById("checkboxNaN");
+
+        function selectNaN() {
+            if (checkboxNaN.checked) {
+
+                showNaNEdges = true;
+                edges.forEach(function (edge) {
+                    if (isNaN(edge.weight)) {
+                        edge.hidden = false;
+                        edges.update(edge);
+                        pickDates();
+                    }
+                });
+            } else {
+                showNaNEdges = false;
+                edges.forEach(function (edge) {
+                    if (isNaN(edge.weight)) {
+                        edge.hidden = true;
+                        edges.update(edge);
+                    }
+                });
+            }
+
+
+        }
+
+
+        const checkboxNoiseLabels = document.getElementById("checkboxNoiseLabels");
+
+        document.getElementById("checkboxNaN").checked = true;
+        document.getElementById("checkboxNoiseLabels").checked = true;
+
+        let showNoiseLabels = true;
+
+        function filterNoiseLabels() {
+            showSelectLoad();
+            setTimeout(selectNoiseLabels, 1000);
+
+
+            setTimeout(hideSelectLoad, 1000);
+        }
+
+        function selectNoiseLabels() {
+            if (checkboxNoiseLabels.checked) {
+
+                showNoiseLabels = true;
+
+                nodes.forEach(function (node) {
+                    if (Number(node.label) == -1) {
+                        node.hidden = false;
+                        nodes.update(node);
+                    }
+                })
+
+                edges.forEach(function (edge) {
+                    if (!nodes.get(edge.to).hidden && !nodes.get(edge.from).hidden) {
+                        if (isNaN(edge.weight) && !showNaNEdges) {
+                            edge.hidden = true;
+                            edges.update(edge);
+
+                        } else {
+                            edge.hidden = false;
+                            edges.update(edge);
+                        }
+                    }
+                })
+
+            } else {
+
+                showNoiseLabels = false;
+
+                nodes.forEach(function (node) {
+                    if (Number(node.label) == -1) {
+
+                        node.hidden = true;
+
+                        nodes.update(node);
+                    }
+                })
+
+                edges.forEach(function (edge) {
+                    if (nodes.get(edge.to).hidden || nodes.get(edge.from).hidden || (isNaN(edge.weight) && !showNaNEdges)) {
+
+                        edge.hidden = true;
+                        edges.update(edge);
+
+                    }
+                })
+
+            }
+            updateClusterDistribution();
+        }
+
+
+        let fillMean = document.getElementById("fillMean");
+        let fillSD = document.getElementById("fillSD");
+
+
+        function calcMean() {
+            let edgeValues = [];
+            edges.forEach(function (edge) {
+                if (!edge.hidden) {
+                    let label = parseFloat(edge.weight);
+                    if (!isNaN(label)) {
+                        edgeValues.push(label);
+                    }
+                }
+            })
+
+            let mean = edgeValues.reduce((a, b) => a + b, 0) / edgeValues.length;
+            let sd = dev(edgeValues, mean);
+            if (isNaN(mean)) {
+                mean = 0;
+            }
+            if (isNaN(sd)) {
+                sd = 0;
+            }
+            mean = mean.toFixed(5);
+            sd = sd.toFixed(5);
+
+            fillMean.innerHTML = "Edge weight mean: ";
+            fillSD.innerHTML = "Edge weight standard deviation: "
+
+            fillMean.append(mean);
+            fillSD.append(sd);
+
+        }
+
+
+        // Javascript program to calculate the standard deviation of an array
+
+        function dev(arr, mean) {
+
+            // Assigning (value - mean) ^ 2 to every array item
+            arr = arr.map((k) => {
+                return (k - mean) ** 2
+            })
+
+
+            // Calculating the sum of updated array
+            let sum = arr.reduce((acc, curr) => acc + curr, 0);
+
+
+            // Returning the standard deviation
+            return Math.sqrt(sum / arr.length)
+        }
+
+        calcMean();
+
+
+        let heading = document.getElementById("heading").innerHTML;
+        let onlyLemma = heading.replace(/ .*/, '');
+
+        //NEW
+
+        // set up flag variables to track which scripts have been loaded successfully
+        let statsLoaded = false;
+        let statsGroupingsLoaded = false;
+        let statsAgreementLoaded = false;
+        let statsPlottingLoaded = false;
+        let statsDataJointLoaded = false;
+
+        let filteredStats = [];
+        let filteredStatsGroupings = [];
+        let filteredStatsAgreement = [];
+        let filteredStatsPlotting = [];
+        let filteredStatsDataJoint = [];
+
+        let clusteringMethod;
+        let cluster_freq_dist;
+        let cluster_prob_dist;
+        let noise_cluster_count;
+        let clusterInfo;
+        let statisticsDiv;
+        let nodePosition;
+
+
+        // create event listeners for each script to set the corresponding flag when loaded
+        document.addEventListener('statsLoaded', function () {
+            console.log('stats.js is fully loaded!');
+            statsLoaded = true;
+            checkAllScriptsLoaded();
+        });
+
+        document.addEventListener('statsGroupingsLoaded', function () {
+            console.log('stats_groupings.js is fully loaded!');
+            statsGroupingsLoaded = true;
+            checkAllScriptsLoaded();
+        });
+
+        document.addEventListener('statsAgreementLoaded', function () {
+            console.log('stats_agreement.js is fully loaded!');
+            statsAgreementLoaded = true;
+            checkAllScriptsLoaded();
+        });
+
+        document.addEventListener('statsPlottingLoaded', function () {
+            console.log('stats_plotting.js is fully loaded!');
+            statsPlottingLoaded = true;
+            checkAllScriptsLoaded();
+        });
+
+        document.addEventListener('statsDataJointLoaded', function () {
+            console.log('data_joint.js is fully loaded!');
+            statsDataJointLoaded = true;
+            checkAllScriptsLoaded();
+        });
+
+        // load each script with the same function
+        function loadScript(scriptUrl, eventName) {
+            const script = document.createElement('script');
+            script.src = scriptUrl;
+            script.type = 'text/javascript';
+
+            script.addEventListener('load', function () {
+                console.log(scriptUrl + ' loaded successfully');
+                document.dispatchEvent(new Event(eventName));
+            });
+
+            script.addEventListener('error', function () {
+                console.log('Failed to load ' + scriptUrl);
+                checkAllScriptsLoaded();
+            });
+
+            document.body.appendChild(script);
+        }
+
+        // call the loadScript function for each script you want to load
+        loadScript('../stats.js', 'statsLoaded');
+        loadScript('../stats_groupings.js', 'statsGroupingsLoaded');
+        loadScript('../stats_agreement.js', 'statsAgreementLoaded');
+        loadScript('../stats_plotting.js', 'statsPlottingLoaded');
+        loadScript('../data_joint.js', 'statsDataJointLoaded');
+
+        // check if all scripts have been loaded, and execute the code that depends on them if they have
+        function checkAllScriptsLoaded() {
+
+            if (statsLoaded) {
+                try {
+                    filteredStats = stats.filter(row => row.lemma === onlyLemma);
+                } catch (err) {
+                    console.log('stats not found');
+                }
+
+                try {
+                    generateTable(filteredStats, "stats");
+                } catch (err) {
+                    console.log('problem generating table with stats');
+                }
+
+                try {
+                    clusteringMethod = filteredStats[0].algorithm;
+                } catch (err) {
+                    console.log('filteredStats[0] not found');
+                }
+
+
+
+            }
+
+            if (statsGroupingsLoaded) {
+                try {
+                    filteredStatsGroupings = stats_groupings.filter(row => row.lemma === onlyLemma);
+                } catch (err) {
+                    console.log('stats_groupings not found');
+                }
+
+                try {
+                    generateTable(filteredStatsGroupings, "statsGroupings");
+                } catch (err) {
+                    console.log('problem generating table with stats_groupings');
+                }
+
+                cluster_freq_dist = filteredStatsGroupings[0].cluster_freq_dist;
+                cluster_prob_dist = filteredStatsGroupings[0].cluster_prob_dist;
+            }
+
+            if (statsAgreementLoaded) {
+                try {
+                    filteredStatsAgreement = stats_agreement.filter(row => row.data === onlyLemma);
+                } catch (err) {
+                    console.log('stats_agreement not found');
+                }
+
+                try {
+                    generateTable(filteredStatsAgreement, "statsAgreement");
+                } catch (err) {
+                    console.log('problem generating table with stats_agreement');
+                }
+
+
+            }
+
+            if (statsPlottingLoaded) {
+                try {
+                    filteredStatsPlotting = stats_plotting.filter(row => row.lemma === onlyLemma);
+                } catch (err) {
+                    console.log('stats_plotting not found');
+                }
+
+                try {
+                    generateTable(filteredStatsPlotting, "statsPlotting");
+                } catch (err) {
+                    console.log('problem generating table with stats_plotting');
+                }
+
+                nodePosition = filteredStatsPlotting[0].node_position;
+            }
+
+            if (statsDataJointLoaded) {
+                try {
+                    filteredStatsDataJoint = data_joint.filter(row => row.lemma === onlyLemma);
+                } catch (err) {
+                    console.log('stats_data_joint not found');
+                }
+
+                try {
+                    generateDetails(filteredStatsDataJoint, "statsDataJoint");
+                } catch (err) {
+                    console.log('problem generating table with statsDataJoint');
+                }
+
+                if(!annotatorsContainer.hasChildNodes()){
+                    fillAnnotatorsContainer(filteredStatsDataJoint);
+                }
+            }
+
+            noise_cluster_count = 0;
+            nodes.forEach(function (node) {
+                if (Number(node.label) == -1) {
+                    noise_cluster_count += 1;
+                }
+            });
+
+            clusterInfo = document.getElementById("clusterInfo");
+            statisticsDiv = document.getElementById("statistics");
+
+            clusterInfo.innerHTML = `
+            <p>Node position: ${nodePosition}</p>
+            <p>Clustering method: ${clusteringMethod}</p>`;
+
+            statisticsDiv.innerHTML = `
+            <p id="clusterFreqDist">Cluster frequency distribution: ${cluster_freq_dist}</p>
+            <p id="clusterProbDist">Cluster probability distribution: ${cluster_prob_dist}</p>
+            <p id="noiseClusterCount">Noise Cluster: [${noise_cluster_count}]</p>`;
+
+        }
+
+
+        function generateTable(jsonData, id) {
+            if (!jsonData || jsonData.length === 0) {
+                console.error(`Error: Invalid JSON data in generateTable function for id '${id}'`);
+                return;
+            }
+
+            let div = document.createElement('div');
+
+
+            let keys = Object.keys(jsonData[0]);
+            keys.forEach(function (key) {
+                let details = document.createElement('details');
+                details.classList.add('shifted');
+                let summary = document.createElement('summary');
+                summary.innerText = key;
+                details.appendChild(summary);
+                let content = document.createElement('div');
+                content.innerText = jsonData[0][key];
+                details.appendChild(content);
+                div.appendChild(details);
+
+            })
+
+            document.getElementById(id).append(div);
+        }
+
+        function generateDetails(jsonData, id) {
+            let div = document.createElement('div');
+
+            for (let i = 0; i < jsonData.length; i++) {
+                let surroundingDetails = document.createElement('details');
+                surroundingDetails.classList.add('shifted');
+                let surroundingSummary = document.createElement('summary');
+                surroundingSummary.innerText = i.toString();
+                surroundingDetails.appendChild(surroundingSummary);
+                div.appendChild(surroundingDetails);
+                let keys = Object.keys(jsonData[i]);
+                keys.forEach(function (key) {
+                    let details = document.createElement('details');
+                    details.classList.add('shifted');
+                    let summary = document.createElement('summary');
+                    summary.innerText = key;
+                    details.appendChild(summary);
+                    let content = document.createElement('div');
+                    content.innerText = jsonData[i][key];
+                    details.appendChild(content);
+                    surroundingDetails.appendChild(details);
+
+                })
+            }
+
+            document.getElementById(id).append(div);
+        }
+
+
+
+
+        function updateClusterDistribution() {
+            let clusterFreqDist = [];
+            let clusterProbDist = [];
+            let noiseClusterCount = 0;
+            let temp = [];
+            let numberOfNodes = 0;
+
+            nodes.forEach(function (node) {
+                if (!node.hidden) {
+                    temp.push(Number(node.label));
+                }
+
+
+            })
+
+            temp.sort();
+
+            let biggestLabel = temp[temp.length - 1];
+
+            for (let i = 0; i <= biggestLabel; i++) {
+                clusterFreqDist.push(0);
+                clusterProbDist.push(0);
+            }
+
+            temp.forEach(function (item) {
+                if (!(item == -1)) {
+                    numberOfNodes += 1;
+                    clusterFreqDist[item] += 1;
+                } else {
+                    noiseClusterCount += 1;
+                }
+            })
+
+            for (let j = 0; j < clusterFreqDist.length; j++) {
+                if (clusterFreqDist[j] > 0) {
+
+                    clusterProbDist[j] = (clusterFreqDist[j] / numberOfNodes);
+
+                    let parts = clusterProbDist[j].toString().split('.');
+
+                    // Check the length of the decimal part
+                    if (parts[1] && parts[1].length > 5) {
+                        // Round the value to 5 decimal places if the decimal part is longer than 5 digits
+                        clusterProbDist[j] = clusterProbDist[j].toFixed(5);
+                    }
+                }
+            }
+
+            document.getElementById("clusterFreqDist").innerHTML = "Cluster frequency distribution: [" + clusterFreqDist.toString() + "]";
+            document.getElementById("clusterProbDist").innerHTML = "Cluster probability distribution: [" + clusterProbDist.toString() + "]";
+            document.getElementById("noiseClusterCount").innerHTML = "Noise cluster: [" + noiseClusterCount.toString() + "]";
+        }
+
+
+        let annotatorsContainer = document.getElementById("annotatorsContainer");
+        let annotators = [];
+
+        function fillAnnotatorsContainer(jsonData) {
+            let div = document.createElement('div');
+            let h4 = document.createElement('h4');
+            h4.innerHTML = "Annotator filter (resets all other filters): ";
+            div.appendChild(h4);
+
+            for (let i = 0; i < jsonData.length; i++) {
+
+                let annotator = jsonData[i]["annotator"]
+                if (!annotators.includes(annotator)) {
+                    annotators.push(annotator);
+                }
+            }
+
+            annotators.sort();
+
+            for (let j = 0; j < annotators.length; j++) {
+                let label = document.createElement('label');
+                label.innerHTML = annotators[j];
+                label.for = annotators[j];
+                let checkbox = document.createElement('input');
+                checkbox.type = "checkbox";
+                checkbox.checked = true;
+                checkbox.id = annotators[j];
+                div.appendChild(label);
+                div.appendChild(checkbox);
+            }
+
+            let button = document.createElement('button');
+            button.innerHTML = "Show graph";
+            button.onclick = annotatorsFilter;
+            div.appendChild(button);
+            let br = document.createElement('br')
+            let br2 = document.createElement('br')
+            div.appendChild(br);
+            div.appendChild(br2);
+
+            annotatorsContainer.append(div);
+        }
+
+
+
+        function annotatorsFilter() {
+            showSelectLoad();
+            setTimeout(calculateSubGraph, 1000);
+
+
+            setTimeout(hideSelectLoad, 2000);
+
+
+        }
+
+        function calculateSubGraph() {
+            loadingIcon.style.visibility = 'visible';
+            let onlyCheckedAnnotators = [];
+            for (let i = 0; i < annotators.length; i++) {
+                let checkAnnotator = document.getElementById(annotators[i]);
+                if (checkAnnotator.checked) {
+                    onlyCheckedAnnotators.push(annotators[i]);
+                }
+            }
+
+
+            let filteredForAnnotators = filteredStatsDataJoint.filter(row => onlyCheckedAnnotators.includes(row.annotator));
+
+
+            groupPicker.selectedIndex = 0;
+            sliderMin.value = 1;
+            slider.value = 4;
+            sliderDisplay.innerHTML = "4";
+            sliderMinDisplay.innerHTML = "1";
+            checkboxNoiseLabels.checked = true;
+            checkboxNaN.checked = true;
+            maxPicker.selectedIndex = dates.length - 1;
+            minPicker.selectedIndex = 0;
+            minValue = minPicker.value;
+            maxValue = maxPicker.value;
+
+            nodes.forEach(function (node){
+                if(node.hidden){
+                    node.hidden = false;
+                    nodes.update(node);
+                }
+            })
+
+            /*edges.forEach(function (edge) {
+                let to = nodes.get(edge.to);
+                let to_id = to.id;
+
+                let from = nodes.get(edge.from);
+                let from_id = from.id;
+
+                let edgeAnnotations = [];
+
+                for (let k = 0; k < filteredForAnnotators.length; k++) {
+                    let item = filteredForAnnotators[k];
+                    let identifier1 = item.identifier1;
+                    let identifier2 = item.identifier2;
+                    let weight = Number(item.judgment);
+
+                    if((identifier1 == to_id && identifier2 == from_id) || (identifier1 == from_id && identifier2 == to_id)){
+
+                        if(0 < weight < 5){
+                            //console.log("there is a corresponding annotation thats not NaN");
+                            edgeAnnotations.push(weight);
+                        }
+                    }
+                }
+
+                if (edgeAnnotations.length !== 0){
+                let median;
+                let filteredArray = edgeAnnotations;
+                filteredArray.sort((a, b) => a - b);
+                let middle = Math.floor(filteredArray.length / 2);
+                if (filteredArray.length % 2 === 0) {
+                    median = (filteredArray[middle - 1] + filteredArray[middle]) / 2;
+                } else {
+                    median = filteredArray[middle];
+                }
+
+                    console.log("the median for this edge is: " + median);
+
+                    if (median == 0){
+                        median = NaN;
+                    }
+
+                    edge.hidden = false;
+                    edge.weight = median;
+                    edge.label = edge.weight;
+
+                    edges.update(edge);
+
+                    } else {
+                    edge.hidden = true;
+                    edges.update(edge);
+                }
+
+
+
+
+
+
+
+            })
+            */
+
+
+            // Create a map to store the filteredForAnnotators array
+            let annotationsMap = new Map();
+            filteredForAnnotators.forEach(function (item) {
+                let identifier1 = item.identifier1;
+                let identifier2 = item.identifier2;
+                let weight = Number(item.judgment);
+                if (weight >= 0 && weight < 5) {
+                    // Only store annotations with weight between 0 and 5
+                    let key = [identifier1, identifier2].sort().join('-');
+                    let annotations = annotationsMap.get(key) || [];
+                    annotations.push(weight);
+                    annotationsMap.set(key, annotations);
+                }
+            });
+
+            // Iterate over the edges and get the annotations from the map
+            edges.forEach(function (edge) {
+                let to = nodes.get(edge.to);
+                let to_id = to.id;
+                let from = nodes.get(edge.from);
+                let from_id = from.id;
+                let key = [to_id, from_id].sort().join('-');
+                let edgeAnnotations = annotationsMap.get(key) || [];
+
+
+                    //console.log("edge annos: " + edgeAnnotations);
+
+                if (edgeAnnotations.length !== 0) {
+                    let median;
+                    let filteredArray = edgeAnnotations.filter(a => a > 0);
+                    filteredArray.sort((a, b) => a - b);
+
+                    if (filteredArray.length === 0) {
+                        median = 0;
+                    } else {
+                        let middle = Math.floor(filteredArray.length / 2);
+                        if (filteredArray.length % 2 === 0) {
+                            median = (filteredArray[middle - 1] + filteredArray[middle]) / 2;
+                        } else {
+                            median = filteredArray[middle];
+                        }
+                    }
+
+
+                    //console.log("the median for this edge is: " + median);
+
+                    if (median == 0) {
+                        median = NaN;
+                    }
+
+                    edge.hidden = false;
+                    edge.weight = median;
+                    edge.label = edge.weight;
+
+                } else {
+                    edge.hidden = true;
+                }
+
+                edges.update(edge);
+            });
+
+
+
+            loadingIcon.style.visibility = 'hidden';
+
+            calcMean();
+            updateClusterDistribution();
+        }
+
+
+        sliderMin.value = 1;
+        slider.value = 4;
+
+
+    </script>
+</body>
+
+</html>
